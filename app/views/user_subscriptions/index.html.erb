@@ -1,0 +1,54 @@
+<div class="offset3 span6">
+	<div class='row'>
+		<h3>Subscriptions</h3>
+	</div>
+	<div class='row'>
+		<div class='span12'>
+			<% @binders.each do |b| %>
+				<div class="object-block">
+					<div class="pull-left">
+						<h4><%= link_to b.name, b.subscription %></h4>
+					</div>
+					<div class="pull-right">
+						<p><%= b.property.address1 %></p>
+	            		<p><%= b.property.city %>, <%= b.property.state %> <%= b.property.zip %></p>
+            		</div>
+            		<div class="clear-float"></div>
+					<table id="subscription-table">
+						<tr id="rowSubscription" class="subscription_row">
+							<th>Subscription Level:</th>
+							<td id="subscLevelCell">
+								<% if @subscriptions[b.id].nil? %>
+									Free
+								<% else %>
+									<%= @subscriptions[b.id].plan.name %>
+								<% end %>
+							</td>
+						</tr>
+						<% if not @subscriptions[b.id].nil? %>
+							<tr id="rowRenewsOn" class="subscription_row">
+								<th> Subscription Renews On:</th>
+								<td id="nextRenewalCell">
+									<%= DateTime.parse(Time.at(@subscriptions[b.id].current_period_end).to_s).strftime("%m/%d/%Y") %>
+								</td>
+							</tr>
+							<% if not @cards[b.id].nil? %>
+								<tr>
+									<th>Payment Method:</th>
+									<td><%= "#{@cards[b.id].type} XXXX-XXXX-XXXX-#{@cards[b.id].last4}" %></td>
+								</tr>
+							<% end %>
+						<% end %>
+					</table>
+				</div>
+			<% end %>
+			<div id="subscBackBlock" class="subsc-action">
+				<% if @binders.count == 1 %>
+					<%= link_to "Back to Binder", @binders[0] %>
+				<% else %>
+					<%= link_to "Back to Binders", binders_path %>	
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

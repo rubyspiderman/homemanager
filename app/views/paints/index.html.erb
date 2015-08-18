@@ -1,0 +1,9 @@
+	<%= content_for :header do %>
+		<%= t(:paint).pluralize %>
+	<% end %>
+	
+	<%= content_for :toolbarbuttons do %>
+		<%= link_to t(:paint_new), new_binder_paint_path(working_binder), :id => 'new_item_btn', :class => "btn btn-hb", :remote => true %>
+	<% end %>
+	
+	<%= render :partial => 'shared/resource_index', :locals => { :resources => @paints } %>

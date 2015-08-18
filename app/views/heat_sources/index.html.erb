@@ -1,0 +1,21 @@
+<h1>Listing heat_sources</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @heat_sources.each do |heat_source| %>
+  <tr>
+    <td><%= link_to 'Show', heat_source %></td>
+    <td><%= link_to 'Edit', edit_heat_source_path(heat_source) %></td>
+    <td><%= link_to 'Destroy', heat_source, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Heat source', new_heat_source_path %>

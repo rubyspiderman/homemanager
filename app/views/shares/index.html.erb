@@ -1,0 +1,17 @@
+<div>
+	<div class="pull-left">
+<h2>Sharing</h2>
+</div>
+<%= link_to "Share", new_share_path, :class => "pull-right btn btn-hb", :style => "margin-top:20px;"%>
+<hr class="orange clear-float" />
+</div>
+<% if @shares.count == 0 %>
+	<div class="hero-unit">
+		<p>You're curently not sharing anything.<br /><br /><%= link_to "Start Sharing", new_share_path, :class => "btn btn-hb" %></p>
+	</div>
+<% else %>
+	<div id="shares">
+	
+	
+	</div>
+<% end %>

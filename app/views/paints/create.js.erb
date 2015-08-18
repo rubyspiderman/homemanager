@@ -1,0 +1,12 @@
+<% if @paint.errors.any? %>
+	
+	prepareDataForm("<%= escape_javascript(render(:partial => "form")) %>");
+
+<% else %>
+
+	closeDataForm();
+	updateDataTable(
+		"<%= escape_javascript(render(:partial => "shared/resource_index", :locals => { :resources => @paints })) %>",
+		"<%= @paints.count %>");
+
+<% end %>

@@ -1,0 +1,16 @@
+<span>
+	Due Next On:&nbsp;
+	<% if maintenance_item.next_event.do_date.nil? %>
+		<%= t(:maintenance_unknown_do) %>
+	<% else %>
+		<%= maintenance_item.next_event.do_date.strftime("%m/%d/%Y") %>
+	<% end %>
+	&nbsp;|&nbsp;
+	Last Done On:&nbsp;
+	<%= maintenance_item.last_event.completed_date.strftime("%m/%d/%Y") unless maintenance_item.last_event.nil? %><br />
+	<div class="maintenance-history">
+		<%= link_to maintenance_item_maintenance_events_path(maintenance_item) do %>
+			<i class='icon-time'></i>&nbsp;View Maintenance History
+		<% end %>
+	</div>
+</span>

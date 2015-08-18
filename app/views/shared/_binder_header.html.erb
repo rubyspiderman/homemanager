@@ -1,0 +1,51 @@
+<% @maint_items = working_binder.maintenance_items.sort_by {|i| i.next_event.do_date} %>
+<% @contractors = working_binder.contractors.sort_by &:name %>
+<% @projects = working_binder.projects %>
+
+<div class="page-header">
+	<div class='span6'>
+		<!--<img src='holder.js/300x300/industrial' class="pull-left" alt="<%= working_binder.name %>">-->
+		<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= working_binder.property.address1 %><%= working_binder.property.city %>, <%= working_binder.property.state %>&zoom=15&size=600x300&key=AIzaSyBkAHC5xhv7J2CSDJWOgAEAbhEaATTsb1Y&sensor=false&markers=color:red|*|<%= working_binder.property.address1 %><%= working_binder.property.city %>, <%= working_binder.property.state %>" class="pull-left" />
+  	</div>
+  	<div class="span6">
+    	<h1><%= working_binder.name %></h1>
+  		<h4><%= working_binder.property.address1 %></h4>
+  		<% if !working_binder.property.address2.blank? %>
+  		<h4><%= working_binder.property.address2 %></h4>
+  		<% end %>
+  		<h4><%= working_binder.property.city %>, <%= working_binder.property.state %> <%= working_binder.property.zip %></h4>
+ 		
+ 		<% if !working_binder.property.country.blank? %>
+  		<h4><%= working_binder.property.country %></h4>
+  		<% end %>
+  		
+  		<br/>
+  		<% if !working_binder.property.apn.blank? %>
+  		<h4>APN: <%= working_binder.property.apn %></h4>
+  		<% end %>
+  		<% if !working_binder.property.acres.blank? %>
+  		<h4>Acreage: <%= working_binder.property.acres %></h4>
+  		<% end %>
+  		
+  		<br/>
+  		<% if !working_binder.property.details.blank? %>
+  		<p><%= working_binder.property.details %></p>
+  		<% end %>
+  	</div>
+  	<div class="clearfix"></div>
+</div>
+
+<div style="margin-left:0px;" class="well well-small span6">
+	<h4>My Projects</h4>
+	<%= render :partial => "projects/projects_simple" %>
+</div>
+
+<div class="well well-small span6">
+	<h4>My Maintenance Items</h4>
+	<%= render :partial => "maintenance_items/maintenance_items_simple" %>
+</div>
+
+<div style="margin-left:0px;" class="well well-small span6">
+	<h4>My Contractors</h4>
+	<%= render :partial => "contractors/contractors_simple" %>
+</div>

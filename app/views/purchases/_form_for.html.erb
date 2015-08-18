@@ -1,0 +1,20 @@
+<div class="controls-row">
+	<div class="control-group-inline span3">
+		<%= f.label :store %>
+		<div class="controls">
+			<%= f.input_field :store, :autocomplete => 'off', :class => 'autocomplete', :data => { :name => 'store', :local => Store.available(current_user.id), :span => "span12" } %>
+		</div>
+	</div>
+	<div class="control-group-inline span3">
+		<%= f.label :date %>
+		<div class="controls">
+			<%= f.input_field :date, :as => :datepicker, :id => "show_date", :class => 'span12' %>
+		</div>
+	</div>
+	<div class="control-group-inline span3">
+		<%= f.label :price %>
+		<div class="controls">
+			<%= f.input_field :price, :class => 'span12' %>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,27 @@
+<div class="page-header">
+	<h1>Shared By Me</h1>
+	<p>The following is a list of content that you are sharing.</p>
+</div>
+
+<% if @shares.length > 0 %>
+	<ul class='share-list'>
+		<% @shares.each do |share| %>
+			<li id='share-<%= share.id %>' class='share'>
+				<h4>
+					<%= link_to share.get_sharable do %>
+						<%= share.sharable_type %>&nbsp;<%= share.sharable.name %>
+					<% end %>
+				</h4>
+				<p>with&nbsp;<%= share.shared_with_email %>&nbsp;as&nbsp;<%= share.role_name.sub('_','-').titleize %>.</p>
+				<p>Status is <%= share.status %></p>
+				<% if share.status == 'pending' || share.status == 'accepted' %>
+					<%= link_to 'Stop Sharing', share, :confirm => t(:confirm_delete), :method => :delete, :remote => true, :class => 'btn btn-hb delete-share' %>
+				<% else %>
+					<%= link_to 'Remove', share, :confirm => t(:confirm_delete), :method => :delete, :remote => true, :class => 'btn btn-hb delete-share' %>
+				<% end %>
+			</li>
+		<% end %>
+	</ul>
+<% else %>
+	<div class="alert alert-info">You are not sharing any content</div>
+<% end %>

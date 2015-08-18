@@ -1,0 +1,9 @@
+	<%= content_for :header do %>
+		<%= t(:contractor).pluralize %>
+	<% end %>
+	
+	<%= content_for :toolbarbuttons do %>
+		<%= link_to t(:contractor_new), new_binder_binder_contractor_path(working_binder), :id => 'new_item_btn', :class => "btn btn-hb", :remote => true %>
+	<% end %>
+	
+	<%= render :partial => 'shared/resource_index', :locals => { :resources => @binder_contractors } %>

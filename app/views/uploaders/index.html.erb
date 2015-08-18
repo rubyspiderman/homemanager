@@ -1,0 +1,21 @@
+<h1>Listing uploaders</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @uploaders.each do |uploader| %>
+  <tr>
+    <td><%= link_to 'Show', uploader %></td>
+    <td><%= link_to 'Edit', edit_uploader_path(uploader) %></td>
+    <td><%= link_to 'Destroy', uploader, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Uploader', new_uploader_path %>

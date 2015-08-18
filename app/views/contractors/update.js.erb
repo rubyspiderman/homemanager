@@ -1,0 +1,11 @@
+<% if @contractor.errors.any? %>
+	
+	prepareEditForm('contractor', "<%= escape_javascript(render(:partial => "form")) %>");
+
+<% else %>
+
+	updateDataTable(
+		"<%= escape_javascript(render(:partial => "shared/resource_index", :locals => { :resources => @contractors })) %>",
+		"<%= @contractors.count %>");
+
+<% end %>

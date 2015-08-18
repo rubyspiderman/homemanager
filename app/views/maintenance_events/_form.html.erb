@@ -1,0 +1,20 @@
+<%= simple_form_for(@maintenance_event, :html => { :class => 'form-horizontal data_form' }, :remote => true) do |f| %>
+  
+  <div class="modal-header">
+  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  	<h3><%= t(:maintenance_event) %></h3>
+  </div>
+  
+  <div class="form-inputs modal-body">
+  	<%= f.error_notification %>
+  	<%= f.hidden_field :created_by %>
+  	<%= f.input :contractor_id, collection:  Contractor.verified_or_created_by(working_user.id), :label_method => Proc.new{ |c| c.name.titleize } %>
+  	<%= f.input :do_date, :as => :datepicker, :input_html => {:id => "do_date_show_date"} %>
+  	<%= f.input :completed_date, :as => :datepicker, :input_html => {:id => "completed_show_date"} %>
+  </div>
+
+  <div class="modal-footer">
+  	<%= f.button :submit, t(:save), :class => "btn btn-hb" %>
+  	<button type="button" class="btn" data-dismiss="modal" aria-hidden="true"><%= t(:cancel) %></button>
+  </div>
+<% end %>

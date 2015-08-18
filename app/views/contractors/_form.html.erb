@@ -1,0 +1,26 @@
+<div class='span6'>
+	<%= simple_form_for(@contractor, :html => { :class => "data_form" }, :remote => true) do |f| %>
+	  <%= f.error_notification %>
+	  <%= f.hidden_field :created_by %>
+	
+	  <div class="form-inputs">
+	  	<%= f.input :name, :autofocus => true, :input_html=> { :class => 'span12' } %>
+	  	<%= f.input :contractor_type, :input_html => { :autocomplete => 'off', :class => 'autocomplete', :data => { :name => "con_type", :local => ContractorType.available(current_user.id), :span => "span12" }} %><br /><br />
+	  	<%= f.simple_fields_for :address do |a| %>
+			<%= render partial: 'addresses/form_for', object: a, as: :f %>
+	  	<% end %>
+	  	<%= f.input :phone, :input_html => { :class => 'span12'} %>
+	  	<%= f.input :email, :input_html => { :class => 'span12'} %>
+		<%= f.input :url, :as => :string, :input_html => { :class => 'span12' } %>
+		<%= f.input :account_number, :input_html => { :class => 'span12' } %>
+		<%= f.input :contact, :input_html => { :class => 'span12' } %>
+		<%= f.input :details, :as => :text, :input_html => { :class => 'span12', :rows => '5' } %>
+		<%= f.hidden_field :verified %>
+	  </div>
+	
+	  <div class="form-actions">
+	    <%= f.button :submit, t(:save), :disable_with => t(:wait), :class => 'btn btn-hb' %>
+	    <%= link_to t(:cancel), "#", :class => "btn cancel_data_form cancel_edit_form", 'data-itemid' => @contractor.id, 'data-controller' => 'contractor' %>
+	  </div>
+	<% end %>
+</div>

@@ -1,0 +1,28 @@
+<div class='container'>
+	<%= render :partial => "shared/binder_header", :locals => { :binder => binder_from_property(@property) } %>
+	<%= render :partial => "shared/tabs", :locals => { :binder => binder_from_property(@property), :active => "property" } %>
+	<div class="binder-content pull-left">
+		<h3>Property Overview</h3>
+		<address>
+			<%= @property.address1 %><br />
+			<% if !@property.address2.blank? %>
+				<%= @property.address2 %><br />
+			<% end %>
+			<%= @property.city %><br />
+			<%= @property.state %><br />
+			<%= @property.zip %><br />
+		</address>
+	</div>
+	<div class="pull-right">
+		<%= link_to edit_property_path(@property), :class => 'btn' do %>
+			<i class="icon-cog"></i>
+			Edit
+		<% end %>
+	</div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+<%= simple_form_for(@binder) do |b| %>
+	<%= b.error_notification %>
+    <%= b.hidden_field :created_by %>
+	<%= b.input :name, :input_html => { :class => "span6" } %>
+	<%= b.input :primary, :label=> false, :inline_label => true %>
+	<%= b.simple_fields_for :property do |p| %>
+		<%= p.input :property_type_id, :as => :radio_buttons, collection: PropertyType.all, :item_wrapper_class => 'inline property_types' %>
+		<div class="hidden">
+			<%= p.input :country do %>
+				<%= p.select :country, region_options_for_select(available_countries) %>
+			<% end %>
+		</div>
+		<%= p.input :address1, :input_html => { :class => "span6" } %>
+		<%= p.input :address2, :input_html => { :class => "span6" } %>
+		<%= p.input :city, :input_html => { :class => "span6" } %>
+		<%= p.input :state, collection: us_states, :input_html => { :class => 'span6' } %>
+		<%#= p.input :state, :input_html => { :class => 'span6'} do %>
+			<%#= p.subregion_select :state, 'US', {}, {class: "span6"} %>
+		<%# end %>
+		<%= p.input :zip, :input_html => { :class => "span6" } %>
+		<%#= p.input :county, :input_html => { :class => "span6" } %>
+		<%#= p.input :apn, :as => :string, :input_html => { :class => "span6" } %>
+		<%= p.input :acres, :as => :string, :input_html => { :class => "span6" } %>
+		<%= p.input :details, :as => :text, :input_html => { :class => "span8", :rows => '5'} %>
+	<% end %>
+	<div class='controls'>
+		<%= b.button :submit, 'Save', :class => "btn btn-hb" %>
+		<%= link_to 'Cancel', @binder, :class => "btn" %>
+	</div>
+<% end %>

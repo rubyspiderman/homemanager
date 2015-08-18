@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 	<%= render 'shared/head' %>
+ 	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+</head>
+<body>
+	<%= render 'shared/application_header' %>
+	<div class="container-fluid" style="margin:0;padding:0;">
+		<div class="row-fluid crumby">
+			<div class="span2">&nbsp;</div>
+			<div class="span10">
+				<ul class="breadcrumb pull-left">
+					<li>
+						<%= link_to "#{current_user.user_profile.display_name}'s Binders", user_binders_path(current_user) if current_user.user_profile.display_name %>
+						<%= link_to "#{current_user.email}'s Binders", user_binders_path(current_user) if !current_user.user_profile.display_name %>
+						<span class="divider">/</span>
+					</li>
+					<li><%= link_to working_binder.name, working_binder %><span class="divider">/</span></li>
+					<li class="active"><%= yield(:header) %></li>
+				</ul>
+				<% if can?(:subscribe, working_binder) %>
+					<% if working_binder.subscription.plan_id == 'free' %>
+						<%= link_to 'Upgrade', working_binder.subscription, :class => 'btn btn-small btn-hb pull-right upgrade-binder' %>
+						<a id="subscriptionButton" href="#" class="pull-right upgrade-binder-text">Subscription Level: <%= working_binder.subscription.plan_id.titleize%></a>
+					<% else %>
+						<%= link_to working_binder.subscription, :class => "pull-right upgrade-binder-text" do %>
+							<% if working_binder.subscription.payment_status == 'failed' %>
+								<i class="icon-warning-sign"></i>&nbsp;
+							<% end %>
+							Subscription:&nbsp;<%= working_binder.subscription.plan_id.titleize %>
+						<% end %>
+					<% end %>
+				<% end %>
+				<% if can?(:share, working_binder) %>
+					<%= link_to new_binder_share_path(working_binder), :remote => true, :class => "pull-right upgrade-binder-text", 'data-toggle' => "tooltip", 'data-placement' => 'bottom', 'title' => t(:share_tip) do %>
+	      				<i class='icon-share'></i>&nbsp;Share
+	      			<% end %>
+      			<% end %>
+      			<% if working_binder.subscription.plan_id != "free" %>
+	      			<%= link_to "/binders/#{working_binder.id}/report.pdf", :class => "pull-right upgrade-binder-text" do %>
+						<i class='icon-print'></i>&nbsp;Print
+					<% end %>
+				<% end %>
+				<div class="clear-float"></div>
+			</div>
+		</div>
+		<div id="formBlock" class='formBlock hidden-form'></div>
+		<div class='main clearfix'>
+			<div class="box">
+				<div class="row-fluid">
+					<div class="column span2">
+					<%= render :partial => "shared/tabs" %>
+				</div>
+				<div id="formModal" class="modal hide fade"></div>
+				<div id="moreInfoModal" class="modal hide fade">
+					<div class="modal-header">
+						<h3 id="moreInfoHeader"></h3>
+					</div>
+					<div id="moreInfoBody" class="modal-body"></div>
+					<div class="modal-footer">
+						<button class="btn btn-hb" data-dismiss="modal" aria-hidden="true"><%= t(:close) %></button>
+					</div>
+				</div>
+				
+				<div class="column span10">
+					<div class="padding">
+						<div class="full span10">
+							<div style="margin-top:7px;">
+								<h2 class="pull-left" ><%= yield(:header) %></h2>
+								<span id="item_count" class="badge pull-left" style="margin:25px 0 0 10px;"><%= @count %></span>
+								<div class="pull-left toolbar-block" style="margin-top:19px;">
+									<!--<div id="item_count" style="display:inline;"><%= yield(:item_count) %></div>-->
+									<div id="toolbar" class="btn-group">
+										<%= yield(:toolbarbuttons)%>
+										<% if params[:controller] != 'binders' %>
+											<%= link_to 'Collapse All', '#', :onclick => 'toggleAllDetails()', :id => 'hideShowAll', :class => 'btn', :data => { :status => 'expanded' } %>
+										<% end %>
+									</div>
+									<div><%= yield(:search) %></div>
+								</div>
+							</div>
+							
+							<div id="form-block" class="form-block form-block-hidden"></div>
+							<div id="errors"><p></p></div>
+							<div id="addFormWell" class="well" style="display:none;margin-top:60px;"></div>
+
+							<hr class="orange clear-float" />
+							<% if @count == 0 %>
+								<div id="no-items" class='hero-unit'>
+									<p>You currenty have no <%= yield(:header) %> in your binder. 
+										Click the new button to add <%= yield(:header) %></p>
+								</div>
+							<% end %>
+							<div id="dataTable">
+								<%= yield %>
+							</div>
+						</div>					
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%= render 'shared/application_footer' %>
+</body>
+</html>

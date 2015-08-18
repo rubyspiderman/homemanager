@@ -1,0 +1,40 @@
+<table class="table table-condensed">
+	<tr>
+		<th class="fixed-width"><%= t(:contractor_address)%></th>
+	    <td colspan="3">
+	    	<% if contractor.address.address1.length > 0 %>
+	    		<%= contractor.address.address1 %>,
+	    	<% end %> 
+	    	<% if contractor.address.address2.length > 0 %>
+	    		<%= contractor.address.address2 %>, 
+	    	<% end %>
+	    	<% if contractor.address.city.length > 0 %>
+	    		<%= contractor.address.city %>, 
+	    	<% end %>	
+	    	<% if contractor.address.state.length > 0 %>
+	    		<%= contractor.address.state %>&nbsp;
+	    	<% end %>
+	    	<% if contractor.address.zip.length > 0 %>
+	    		<%= contractor.address.zip %>
+	    	<% end %>
+	    </td>
+	</tr>
+	<tr>
+		<th class="fixed-width"><%= t(:contractor_phone) %></th>
+		<td><%= contractor.phone.phony_formatted(:format => :national, :spaces => '-') unless contractor.phone.nil? %></td>
+		<th class="fixed-width"><%= t(:contractor_email) %></th>
+		<td><%= contractor.email %></td>
+	</tr>
+	<tr>
+		<th><%= t(:contractor_url) %></th>
+		<td><a href="http://<%= contractor.url %>"><%= contractor.url %></a></td>
+		<th></th>
+		<td></td>
+	</tr>
+	<tr>
+		<th><%= t(:contractor_account_number)%></th>
+		<td><%= contractor.account_number %></td>
+		<th><%= t(:contractor_contact)%></th>
+		<td><%= contractor.contact %></td>
+	</tr>
+</table>

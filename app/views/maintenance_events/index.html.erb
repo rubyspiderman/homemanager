@@ -1,0 +1,14 @@
+	<%= content_for :header do %>
+		<%= "#{t(:maintenance_history)}#{MaintenanceItem.find(params[:maintenance_item_id]).name}" %>
+	<% end %>
+	
+	<div class="alert alert-info">
+		<%= MaintenanceItem.find(@next_event.maintenance_item_id).name %>
+		<%= t(:maintenance_event_alert) %>
+		<strong><%= @next_event.do_date.strftime('%m/%d/%Y') %></strong>
+		<%= link_to edit_maintenance_event_path(@next_event), :remote => true, :class => 'edit_item_btn', 'data-toggle' => "tooltip", 'title' => t(:edit_tip), 'data-itemid' => @next_event.id do %> 
+    		<i class='icon-edit'></i>
+    	<% end %>	
+	</div>
+
+	<%= render :partial => 'shared/resource_index', :locals => { :resources => @maintenance_events } %>

@@ -1,0 +1,38 @@
+<div ng-controller="AddressFormCtrl">
+	<div class="form-group">
+		<div class="row">
+  			<div class="col-xs-6">		
+				<label for="address1">Address</label>
+				<input id="address1" type="text" class="form-control input-lg" ng-model="data.form.address_attributes.address1" />
+			</div>
+			<div class="col-xs-6">
+				<label for="address2">Apt/Suite</label>
+				<input id="address2" type="text" class="form-control input-lg" ng-model="data.form.address_attributes.address2" />
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+  			<div class="col-xs-6">
+				<label for="city">City</label>
+				<input id="city" type="text" class="form-control input-lg" ng-model="data.form.address_attributes.city" />
+			</div>
+			<div class="col-xs-6">
+				<label for="state">State</label>
+				<select id="state" class="form-control input-lg" ng-model="data.form.address_attributes.state" ng-options="subregion.value as subregion.name for subregion in options.subregions"></select>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+  			<div class="col-xs-6">		
+				<label for="zip">Zip Code</label>
+				<input id="zip" type="text" class="form-control input-lg" ng-model="data.form.address_attributes.zip" />
+			</div>
+			<div class="col-xs-6" ng-show="false">
+				<label for="country">Country</label>
+				<select id="country" class="form-control input-lg" ng-model="data.form.address_attributes.country" ng-options="country.value as country.name for country in options.countries"></select>
+			</div>
+		</div>
+	</div>
+</div>

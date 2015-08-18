@@ -1,0 +1,29 @@
+<%= simple_form_for(@maintenance_item, :html => { :class => 'data_form' }, :remote => true) do |f| %>
+ 	<%= f.hidden_field :binder_id %>
+  	<%= f.hidden_field :created_by %>
+  	
+	<div class="modal-header">
+  		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  		<h3><%= t(:maintenance_item) %></h3>
+  	</div>
+
+	<div class="form-inputs modal-body">
+		<%= f.error_notification %>
+		<%= f.input :name, :autofocus => true, :input_html => { :class => 'span10' } %>
+		<div class='controls controls-row'>
+			<%= f.label 'Occurs Every' %>
+			<%= f.input_field :interval, :as => :string, :class => 'span4' %>
+			<%= f.input_field :maintenance_cycle_id, :label => false, collection: MaintenanceCycle.all, :as => :select, :class => 'span6' %>
+		</div>
+		<%= f.input :do_date, :as => :datepicker, :input_html => { :class => 'span10', :id => 'do_date_show_date' } %>
+		<%#= f.input :structure_id, collection: Structure.where(:binder_id => @maintenance_item.binder_id), :input_html => { :class => 'span10' } %>
+		<%#= f.input :area_id, collection: Area.where(:binder_id => @maintenance_item.binder_id), :input_html => { :class => 'span10' } %>
+		<%#= f.input :appliance_id, collection: Appliance.where(:binder_id => @maintenance_item.binder_id), :input_html => { :class => 'span10' } %>
+		<%= f.input :details, :as => :text, :input_html => { :class => 'span10', :rows => '5' } %>
+  	</div>
+
+  	<div class="modal-footer">
+  		<%= f.button :submit, t(:save), :class => "btn btn-hb" %>
+  		<button type="button" class="btn" data-dismiss="modal" aria-hidden="true"><%= t(:cancel) %></button>
+  	</div>
+<% end %>

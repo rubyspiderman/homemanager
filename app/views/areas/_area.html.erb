@@ -1,0 +1,10 @@
+<table class="table table-condensed">
+	<tr>
+		<th class="fixed-width"><%= t(:area_type) %></th>
+		<td><%= area.area_type %></td>
+		<th class="fixed-width"><%= t(:area_struct) %></th>
+		<td><%= Structure.find(area.structure_id).name unless area.structure_id.nil? %></td>
+		<th class="fixed-width"><%= t(:area_dimensions) %></th>
+		<td><%= area.dimensions %></td>
+	</tr>
+</table>

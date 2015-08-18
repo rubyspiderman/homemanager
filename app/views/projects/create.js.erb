@@ -1,0 +1,12 @@
+<% if @project.errors.any? %>
+	
+	showModalForm("<%= escape_javascript(render(:partial => "form")) %>");
+
+<% else %>
+
+	closeModalForm();
+	updateDataTable(
+		"<%= escape_javascript(render(:partial => "shared/resource_index", :locals => { :resources => @projects })) %>",
+		"<%= @projects.count %>");
+
+<% end %>

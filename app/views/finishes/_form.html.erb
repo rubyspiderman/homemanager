@@ -1,0 +1,39 @@
+<%= simple_form_for(@finish, :html => { :class => "data_form" }, :remote => true) do |f| %>
+  <%= f.error_notification %>
+  <%= f.hidden_field :binder_id %>
+  <%= f.hidden_field :created_by %>
+
+	<div class="form-inputs">
+		<%= f.input :name, :autofocus => true, :input_html => { :class => 'span9' } %>
+		<div class="controls-row">
+			<div class="control-group-inline span3">
+				<%= f.label :make %>
+				<div class="controls">
+					<%= f.input_field :make, :autocomplete => 'off', :class => 'autocomplete', :data => { :name => "make", :local => FinishMake.available(working_user.id), :span => "span12" } %>
+				</div>
+			</div>
+			<div class="control-group-inline span3">
+				<%= f.label :model %>
+				<div class="controls">
+					<%= f.input_field :model, :class => "span12" %>
+				</div>
+			</div>
+			<div class="control-group-inline span3">
+				<%= f.label :style_color %>
+				<div class="controls">
+					<%= f.input_field :style_color, :class => 'span12' %>
+				</div>
+			</div>
+		</div>
+		<%= f.simple_fields_for :purchase do |p| %>
+			<%= p.hidden_field :created_by, :value => @finish.created_by %>
+			<%= render partial: 'purchases/form_for', object: p, as: :f %>
+		<% end %>
+		<%= f.input :details, :as => :text, input_html: { :rows => '5', :class => 'span9' } %>
+	</div>
+
+  	<div class="form-actions">
+    	<%= f.button :submit, t(:save), :disable_with => t(:wait), :class => 'btn btn-hb' %>
+    	<%= link_to t(:cancel), "#", :class => "btn cancel_data_form cancel_edit_form", 'data-itemid' => @finish.id, 'data-controller' => 'finish' %>
+  	</div>
+<% end %>

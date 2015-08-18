@@ -1,0 +1,21 @@
+<h1>Listing inventory_item_types</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @inventory_item_types.each do |inventory_item_type| %>
+  <tr>
+    <td><%= link_to 'Show', inventory_item_type %></td>
+    <td><%= link_to 'Edit', edit_inventory_item_type_path(inventory_item_type) %></td>
+    <td><%= link_to 'Destroy', inventory_item_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Inventory item type', new_inventory_item_type_path %>

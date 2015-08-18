@@ -1,0 +1,26 @@
+<table class="table table-condensed">
+	<tr>
+		<th class="fixed-width"><%= t(:struct_construction_style) %></th>
+		<td><%= structure.construction_style %></td>
+		<th class="fixed-width"><%= t(:struct_construction_type) %></th>
+		<td><%= structure.construction_type %></td>
+	</tr>
+	<tr>
+		<th><%= t(:struct_year) %></th>
+		<td><%= structure.year_built %></td>
+		<th><%= t(:struct_feet) %></th>
+		<td><%= structure.sq_ft %></td>
+	</tr>
+	<tr>
+		<th><%= t(:struct_beds) %></th>
+		<td><%= structure.beds %></td>
+		<th><%= t(:struct_baths) %></th>
+		<td><%= structure.baths %></td>
+	</tr>
+	<tr>
+		<th><%= t(:struct_heat_type) %></th>
+		<td><%= structure.heat_type %></td>
+		<th><%= t(:struct_heat_source) %></th>
+		<td><%= structure.heat_source %></td>
+	</tr>
+</table>

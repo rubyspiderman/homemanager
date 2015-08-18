@@ -1,0 +1,19 @@
+<br />
+<div>
+	<div class="show-resource-line">
+		<div class="show-resource-label">
+			<%= t(:inventory_type) %>
+		</div>
+		<div class="show-resource-value">
+			<%= inventory_item.inventory_type %>
+		</div>
+	</div>
+	<div class="show-resource-line clear-float">
+		<div class="show-resource-label">
+			<%= t(:inventory_value) %>
+		</div>
+		<div class="show-resource-value">
+			<%= number_to_currency(inventory_item.value) %>
+		</div>
+	</div>
+</div>

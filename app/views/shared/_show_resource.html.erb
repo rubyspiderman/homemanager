@@ -1,0 +1,5 @@
+<%= content_for :header do %>
+	<%= resource.class.name.humanize %>
+<% end %>
+
+<%= render :partial => 'shared/tabbed_resource', :locals => { :resource => resource } %>

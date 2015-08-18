@@ -1,0 +1,19 @@
+<%= simple_form_for([@sharable, @share], :remote => true) do |f| %>
+	<div class="modal-header">
+  		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  		<h3>Share&nbsp;<%= @sharable.class.name %></h3>
+  	</div>
+  	<div class="form-inputs modal-body">
+  		<%= f.error_notification %>
+  		<%= f.hidden_field :shared_by_id %>
+		<%= f.hidden_field :status %>
+ 		<%= f.input :shared_with_email, :as => :email, :autofocus => true %>
+ 		<%= f.input :role_name, collection: [[t(:share_co_owner), 'co_owner'], [t(:share_reader), 'reader']], :as => :radio_buttons if @sharable.class.name.downcase == "binder" %>
+ 		<%= f.input :role_name, collection: [[t(:share_reader2), 'reader'], [t(:share_reader_writer), 'reader_writer']], :as => :radio_buttons if @sharable.class.name.downcase != "binder" %>
+  	</div>
+
+  	<div class="modal-footer">
+    	<%= f.button :submit, "OK", :disable_with => t(:wait), :class => 'btn btn-hb' %>
+		<button type="button" class="btn" data-dismiss="modal" aria-hidden="true"><%= t(:cancel) %></button>
+  	</div>
+<% end %>

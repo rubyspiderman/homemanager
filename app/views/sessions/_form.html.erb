@@ -1,0 +1,12 @@
+<%= simple_form_for :session, url: sessions_path do |f| %>
+	<%= f.input :email, :as => :email, :required => false %>
+	<%= f.input :password, :required => false %>
+	<%= f.input :remember_me, inline_label: 'Keep me logged in', :as => :boolean %>
+	<%= f.button :submit, 'Sign In' %>
+	<% if flash[:error] != nil %>
+		<div class='alert alert-error'>
+			<%= flash[:error] %>	
+		</div>
+	<% end %>
+<% end %>
+<%= link_to "Forgot Password?", "/forgot_password" %>

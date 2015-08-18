@@ -1,0 +1,60 @@
+// Place all the styles related to the Binders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.binder-tabs-block
+{
+  margin-top: 25px;
+}
+
+.binder-header-block
+{
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.binder-header-block address
+{
+  margin-left: 40px;
+}
+
+.address-name
+{
+  font-size: 24px;
+}
+
+.address-details
+{
+ font-size: 16px; 
+}
+
+.property_types
+{
+  margin-right:15px;
+}
+
+.shade
+{
+  border-style:solid;
+  border-width:1px;
+  border-color:#000000;
+  background-color:#FFFFFF;
+  position:absolute;
+  z-index:0;
+  max-height:600px;
+  width:800px;
+  display:none;
+  overflow:auto;
+}
+
+.shade-content
+{
+  padding-left:0px;
+  padding-right:0px;
+  padding-bottom:0px;
+  
+}
+
+.shade-buttonbar
+{
+  padding:5px 10px;
+}

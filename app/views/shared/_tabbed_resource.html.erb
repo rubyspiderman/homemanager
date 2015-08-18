@@ -1,0 +1,75 @@
+		<div class="datatable clearfix well" style="display:none;" id="<%= resource.class.name.downcase %>_edit_<%= resource.id %>"></div>
+  		<div class="thumbnail clearfix" id="<%= resource.class.name.downcase %>_<%= resource.id %>"> 
+  			<% if resource.respond_to?(:name) %> 			
+  				<div class="pull-left">
+	    			<h4><%= resource.name.titleize %></h4>
+		    	</div>
+		    <% end %>
+		    <div class="pull-right">
+		    	<a id="<%= resource.class.name.downcase %>_expander_<%= resource.id %>" style="display:none;" data-toggle="tooltip" title="Show Details" href="javascript:showDetails('<%= resource.class.name.downcase %>', <%= resource.id %>);">
+					<i class='icon-chevron-down'></i>
+				</a>
+		    	<a id="<%= resource.class.name.downcase %>_contractor_<%= resource.id %>" data-toggle="tooltip" title="Hide Details" href="javascript:hideDetails('<%= resource.class.name.downcase %>', <%= resource.id %>);">
+		    		<i class='icon-chevron-up'></i>
+		    	</a>
+		    	<% if 1 == 2 %>
+		    		<%= link_to polymorphic_url([resource, Share], :action => 'new'), :remote => true, :class => 'edit_item_btn', 'data-toggle' => "tooltip", 'title' => t(:share_tip), 'data-itemid' => resource.id do %> 
+	    				<i class='icon-share'></i>
+	    			<% end %>
+		    	<% end %>
+		    	<% if can?(:write, resource) %>
+	    			<%= link_to edit_polymorphic_path(resource), :remote => true, :class => 'edit_item_btn', 'data-toggle' => "tooltip", 'title' => t(:edit_tip), 'data-itemid' => resource.id do %> 
+	    				<i class='icon-edit'></i>
+	    			<% end %>
+    			<% end %>
+    			<% if can?(:destroy, resource) %>
+	     			<%= link_to resource, :confirm => t(:confirm_delete), :method => :delete, :remote => true, :class => 'delete_post', 'data-toggle' => "tooltip", 'title' => t(:delete_tip) do %>
+	     				<i class='icon-remove'></i>
+	     			<% end %>	
+     			<% end %>	    	
+		    </div>
+		    <div class="datatable clearfix" id="<%= resource.class.name.downcase %>_details_<%= resource.id %>">
+		    	<div class="tabbable resource-content">
+		    		<ul class="nav nav-tabs">
+		    			<li class="active"><a href="#<%= resource.class.name.downcase %>_<%= resource.id %>_info" data-toggle="tab"><%= t(:info_tab) %></a></li>
+		    			<li><%= link_to t(:gallery_tab), polymorphic_url([resource, Image]), :remote => true, :class => "upload-tab", :data => {:container => "#item_#{resource.id}_images", :target => "##{resource.class.name.downcase}_#{resource.id}_gallery", :toggle => "tab", :itemid => "#{resource.id}", :uptype => "image"} %></li>
+		    			<li><%= link_to t(:docs_tab), polymorphic_url([resource, Document]), :remote => true, :class => "upload-tab", :data => {:container => "#item_#{resource.id}_docs", :target => "##{resource.class.name.downcase}_#{resource.id}_docs", :toggle => "tab", :itemid => "#{resource.id}", :uptype => "doc"} %></li>
+		    			<li><%= link_to t(:notes_tab), polymorphic_url([resource, Note]), :remote => true, :data => {:container => "#item_#{resource.id}_notes", :target => "##{resource.class.name.downcase}_#{resource.id}_notes", :toggle => "tab"} %></li>
+		    		</ul>
+		    		<div class="tab-content">
+		    			<div id="<%= resource.class.name.downcase %>_<%= resource.id %>_info" class="tab-pane active">
+		    				<% if resource.respond_to?(:details) %>
+		    					<span><%= resource.details %></span>
+		    				<% end %>
+	    					<%= render resource %>
+	    				</div>
+	    				<div id="<%= resource.class.name.downcase %>_<%= resource.id %>_gallery" class="tab-pane photo-gallery">
+							<%= render :partial => "images/container", :locals => {:itemid => resource.id } %>
+							<% if can? :write, resource and @binder.subscription.plan_id != 'free' %>
+				            	<%= render :partial => "uploaders/form", :locals => {:itemid => resource.id, :type => 'image'} %>
+				            <% end %>
+				            <% if @binder.subscription.plan_id == 'free' %>
+				            	<p><%= link_to 'Upgrade', @binder.subscription %> your subscription to begin storing images.</p>
+				            <% end %>
+	    				</div>
+	    				<div id="<%= resource.class.name.downcase %>_<%= resource.id %>_docs" class="tab-pane doc-gallery">
+	    					<%= render :partial => "documents/container", :locals => {:itemid => resource.id } %>
+	    					<% if can? :write, resource and @binder.subscription.plan_id != 'free' %>
+	    						<%= render :partial => "uploaders/form", :locals => {:itemid => resource.id, :type => 'doc'} %>
+	    					<% end %>
+	    					<% if @binder.subscription.plan_id == 'free' %>
+				            	<p><%= link_to 'Upgrade', @binder.subscription %> your subscription to begin storing documents.</p>
+				            <% end %>
+	    				</div>
+	    				<div id="<%= resource.class.name.downcase %>_<%= resource.id %>_notes" class="tab-pane">
+	    					<%= render :partial => "notes/container", :locals => {:itemid => resource.id } %>
+							<% if can?(:write, resource) %>
+								<%= link_to polymorphic_url([resource, Note], :action => 'new'), :remote => true , :class => "btn btn-hb" do %>
+									<i class='icon-plus-sign icon-white'></i>&nbsp;Add New Note
+								<% end %>
+							<% end %>
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+     	</div>

@@ -1,0 +1,61 @@
+<%= form_for(@property, :html => {:class => "form-horizontal"}) do |f| %>
+  <% if @property.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved:</h2>
+
+      <ul>
+      <% @property.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<%= f.hidden_field :binder_id %>
+	<div class='control-group'>
+		<%= f.label :property_type, :class => 'control-label' %>
+		<div class='controls'>
+			<%= f.collection_select :property_type_ids, PropertyType.all, :id, :name %>
+		</div>
+	</div>
+	<div class='control-group'>
+		<%= f.label "Address", :class => 'control-label' %>
+		<div class='controls'>
+			<%= f.text_field :address1 %>	
+		</div>
+	</div>
+	<div class='control-group'>
+		<div class='controls'>
+			<%= f.text_field :address2 %>	
+		</div>
+	</div>
+	<div class='control-group'>
+		<%= f.label :city, :class => 'control-label' %>
+		<div class='controls'>
+			<%= f.text_field :city %>	
+		</div>
+	</div>
+	<div class='control-group'>
+		<%= f.label :state, :class => 'control-label' %>
+		<div class='controls'>
+			<%= f.subregion_select :state, 'US' %>
+		</div>
+	</div>
+	<div class='control-group'>
+		<%= f.label :zip, 'Zip Code', :class => 'control-label' %>
+		<div class='controls'>
+			<%= f.text_field :zip %>	
+		</div>
+	</div>
+	<div class='control-group'>
+		<%= f.label :county, :class => 'control-label' %>
+		<div class='controls'>
+			<%= f.text_field :county %>
+		</div>
+	</div>
+  	<div class="control-group">
+  		<div class='controls'>
+    		<%= f.submit %>
+    	</div>
+  	</div>
+<% end %>

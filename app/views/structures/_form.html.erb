@@ -1,0 +1,73 @@
+<%= simple_form_for(@structure, :html => { :class => 'data_form' }, :remote => true) do |f| %>
+	
+	<div class="alert alert-error errors" style="display:none;"></div>
+	
+	<div class="form-inputs modal-body">
+		<%= f.error_notification %>
+		<%= f.hidden_field :binder_id %>
+		<%= f.hidden_field :created_by %>
+		<%= f.input :name, :autofocus => true, :input_html => { :class => 'span8' } %>
+		<div class="controls-row">
+			<div class="control-group-inline span4">
+				<%= f.label :construction_style %>
+				<div class="controls">
+					<%= f.input_field :construction_style, :class => 'autocomplete', :autocomplete => 'off', :data => { :name => "con_style", :local => ConstructionStyle.available(working_user.id), :span => "span12" } %><br /><br />
+				</div>
+			</div>
+			<div class="control-group-inline span4">
+				<%= f.label :construction_type %>
+				<div class="controls">
+					<%= f.input_field :construction_type, :class => 'autocomplete', :autocomplete => 'off', :data => { :name => "con_type", :local => ConstructionType.available(working_user.id), :span => "span12" } %><br /><br />
+				</div>
+			</div>
+		</div>
+		<div class="controls-row">
+			<div class="control-group-inline span4">
+				<%= f.label :year_built %>
+				<div class="controls">
+					<%= f.input_field :year_built, :as => :string, :class => 'span12' %>
+				</div>
+			</div>
+			<div class="control-group-inline span4">
+				<%= f.label :sq_ft %>
+				<div class="controls">
+					<%= f.input_field :sq_ft, :as => :string, :class => 'span12' %>
+				</div>
+			</div>
+		</div>
+		<div class="controls-row">
+			<div class="control-group-inline span4">
+				<%= f.label :beds %>
+				<div class="controls">
+					<%= f.input_field :beds, :as => :string, :class => 'span12' %>
+				</div>
+			</div>
+			<div class="control-group-inline span4">
+				<%= f.label :baths %>
+				<div class="controls">
+					<%= f.input_field :baths, :as => :string, :class => 'span12' %>
+				</div>
+			</div>
+		</div>
+		<div class="controls-row">
+			<div class="control-group-inline span4">
+				<%= f.label :heat_type %>
+				<div class="controls">
+					<%= f.input_field :heat_type, :autocomplete => 'off', :class => 'autocomplete', :data => { :name => ":heat_type", :local => HeatType.available(working_user.id), :span => "span12" } %><br /><br />
+				</div>
+			</div>
+			<div class="control-group-inline span4">
+				<%= f.label :heat_source %>
+				<div class="controls">
+					<%= f.input_field :heat_source, :autocomplete => 'off', :class => 'autocomplete', :data => { :name => ":heat_source", :local => HeatSource.available(working_user.id), :span => "span12" } %><br /><br />
+				</div>
+			</div>
+		</div>
+		<%= f.input :details, :as => :text, :input_html => { :rows => '5', :class => 'span8' } %>
+	</div>
+	
+	<div class='form-actions'>
+		<%= f.button :submit, t(:save), :disable_with => t(:wait), :class => 'btn btn-hb' %>
+		<%= link_to t(:cancel), "#", :class => "btn cancel_edit_form cancel_data_form", 'data-itemid' => @structure.id, 'data-controller' => 'structure' %>
+	</div>  
+<% end %>

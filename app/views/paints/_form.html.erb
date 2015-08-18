@@ -1,0 +1,35 @@
+<%= simple_form_for(@paint, :html => { :class => "data_form" }, :remote => true) do |f| %>
+  	<%= f.error_notification %>
+  	<%= f.hidden_field :binder_id %>
+  	<%= f.hidden_field :created_by %>
+
+	<div class="form-inputs">
+		<%= f.input :name, :autofocus => true, :input_html => { :class => 'span5' } %>
+		<%= f.input :paint_manufacturer, :input_html => { :autocomplete => 'off', :class => 'autocomplete', :data => { :name => 'manufacturer', :local => PaintManufacturer.available(working_user.id), :span => "span5" }} %><br /><br />
+  		<div class="controls-row">
+			<div class="control-group-inline span5">
+				<%= f.label :code %>
+				<div class="controls">
+					<%= f.input_field :code, :class => 'span12' %>
+				</div>
+			</div>
+			<div class="control-group-inline span4">
+				<%= f.label :makeup %>
+				<div class="controls">
+					<%= f.input_field :makeup, :class=> 'span12' %>
+				</div>
+			</div>
+		</div>
+		<%= f.simple_fields_for :purchase do |p| %>
+			<%= p.hidden_field :created_by, :value => @paint.created_by %>
+			<%= render partial: 'purchases/form_for', object: p, as: :f %>
+		<% end %>
+  		<%= f.association :areas, :as => :check_boxes, collection: Area.where(:binder_id => @paint.binder_id).order("name"), :class => 'span9' %>
+  		<%= f.input :details, :as => :text, input_html: { :rows => '5', :class => 'span9' } %>
+	</div>
+
+  	<div class="form-actions">
+    	<%= f.button :submit, t(:save), :disable_with => t(:wait), :class => 'btn btn-hb' %>
+    	<%= link_to t(:cancel), "#", :class => "btn cancel_data_form cancel_edit_form", 'data-itemid' => @paint.id, 'data-controller' => 'paint' %>
+  	</div>
+<% end %>

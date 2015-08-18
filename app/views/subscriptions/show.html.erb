@@ -1,0 +1,195 @@
+<div class="offset3 span6">
+	<div class="row">
+		<div class="span12">
+			<div class="pull-left">
+			<h3>Subscription for <%= @binder.name %></h3>
+			</div>
+			<div class="pull-right">
+				<p><%= @binder.property.address1 %></p>
+	            <p><%= @binder.property.city %>, <%= @binder.property.state %> <%= @binder.property.zip %></p>
+			</div>
+			<div class="clear-float"></div>
+			<div id="notifyUserBlock" class="alert alert-success hide"></div>
+			<% if @subscription.payment_status == 'failed'%>
+				<div id="paymentFailedNotification" class="alert alert-error">Payment for the binder's subscription failed. Verify your payment information.</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">
+			<div class="object-block">
+				<table id="subscription-table">
+					<tr id="rowSubscription" class="subscription_row">
+						<th>Subscription Level:</th>
+						<td id="subscLevelCell">
+							<%= @subscription.plan_id.titleize %>
+							<% if @subscription.plan_id == 'free' %>
+								<a id="beginUpgradeSubsc" href="#" class="subsc-btn btn btn-hb">Upgrade</a>
+							<% end %>
+						</td>
+					</tr>
+					<% if @subscription.plan_id != 'free' %>
+						<tr id="rowRenewsOn" class="subscription_row">
+							<th> Subscription Renews On:</th>
+							<td id="nextRenewalCell">
+								<%= "--" if @subscription.plan_id == 'free' %>
+								<%= DateTime.parse(Time.at(@customer.subscription.current_period_end).to_s).strftime("%m/%d/%Y") unless @subscription.plan_id == 'free' %>
+							</td>
+						</tr>
+						<% if not @card.nil? %>
+							<tr id="rowCCInfo" class="subscription_row">
+								<th>Payment Method:</th>
+								<td id="ccCell">
+									<%= "--" if @subscription.plan_id == "free" %>
+									<%= "#{@card.type} XXXX-XXXX-XXXX-#{@card.last4}" unless @subscription.plan_id == 'free' %>
+								</td>
+							</tr>
+							<tr id="rowCCExpires" class="subscription_row">
+								<th> Card Expires On:</th>
+								<td>
+									<%= "--" if @subscription.plan_id == "free" %>
+									<%= "#{@card.exp_month}/#{@card.exp_year}" unless @subscription.plan_id == 'free' %>
+								</td>
+							</tr>
+						<% end %>
+					<% end %>
+					<tr id="rowCoupon" class="hide">
+						<td colspan="1">
+							<div id="couponFormContainer" class="hide">
+								<h3><b>Subscription</b></h3>
+								<form id="couponForm" class="form-horizontal">
+									<div class="coupon-errors alert alert-error hide"></div>
+									<div class="control-group">
+										<label class="control-label">Standard Subscription</label>
+											<div class="controls">
+												<input type="text" readonly="true" value="<%= number_to_currency(@standardPlan.amount / 100.00) %>" class="span4" />
+											</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Coupon</label>
+										<div class="controls">
+											<input id="coupon" type="text" class="span4" />
+										</div>
+									</div>
+									<div class="form-inputs">
+										<button type="submit" class="btn btn-hb" id="couponNext">Next</button>
+										<a href="#" class="btn" id="cancelCoupon">Cancel</a>
+									</div>
+								</form>
+							</div>
+						</td>
+					</tr>
+					<tr id="rowForm" class="hide">
+						<td colspan="2">
+							<div id="paymentFormContainer" class="hide span12">
+								<div class="span6">
+									<h3 id="paymentFormHeader"><b>Payment Information</b></h3>
+									<form id="paymentForm" class='form-horizontall'>
+										<input id="subscId" type="hidden" value="<%= @subscription.id %>" />
+										<input id="binderId" type="hidden" value="<%= @subscription.binder_id %>" />
+										<input id="planId" type="hidden" value="<%= @subscription.plan_id %>" />
+										<input id="coupon_id" type="hidden" />
+										<div class="payment-errors alert alert-error hide"></div>
+										
+										<div class="control-group">
+											<label class="control-label">Card Number</label>
+											<div class="controls">
+												<input id="cardNum" type="text" maxlength="16" data-stripe="number" class="span4"/>
+												<img id="cardTypes" alt="cards" src="/assets/cctypes.jpg" height="32" width="194">	
+											</div>
+										</div>
+										
+										<div class="control-group">
+											<label class="control-label">Expiration</label>
+											<div class="controls">
+												<input type="text" maxlength="2" size="2" data-stripe="exp-month" class="span2" placeholder="MM"/>
+												<input type="text" maxlength="4" size="4" data-stripe="exp-year" class="span2" placeholder="YYYY"/>
+											</div>
+										</div>
+										
+										<div class="control-group">
+											<label class="control-label">CVC</label>
+											<div class="controls">
+												<input type="text" maxlength="4" data-stripe="cvc" class="span2"/>
+											</div>
+										</div>
+										
+												
+										<% if @subscription.plan_id == 'free' %>  
+											<div id="upgradeSubscritionActions" class="form-inputs">
+												<button type="submit" id="upgradeButton" href="#" class="btn btn-success">Upgrade</button>
+												<a id="cancelUpgradeButton" href="#" class="btn subsc-btn">Cancel</a>
+												<p id="upgrade-info">By clicking Upgrade, I allow HomeBinder.com to charge me the total listed per year.</p>
+											</div>
+										<% end %>
+										
+										<% if @subscription.plan_id != 'free' %>
+											<div id="updatePaymentActions" class="form-inputs">
+												<button type="submit" id="updatePaymentButton" href="#" class="btn btn-success subsc-btn">Update</button>
+												<a id="cancelUpdateButton" href="#" class="btn subsc-btn">Cancel</a>
+												
+												<% if @subscription.payment_status == 'failed' %>
+													<p class="sub-text">Payment will be attemted with your new card.</p>
+												<% end %>
+											</div>	
+										<% end %>
+									</form>
+								</div>
+								<% if @subscription.plan_id == 'free' %>
+								<div class="span6">
+									<table id="tableTotals">
+									<tr>
+										<th>Sub Total:</th>
+										<td id="cellSubTotal" class="confirm-payment"></td>
+									</tr>
+									<tr>
+										<th>Discount:</th>
+										<td id="cellDiscount" class="confirm-payment"></td>
+									</tr>
+									<tr>
+										<th>Total:</th>
+										<td id="cellTotal" class="confirm-payment"></td>
+									</tr>
+								</table>
+								</div>
+								<% end %>
+							</div>
+						</td>
+					</tr>
+					<% if @subscription.plan_id != 'free' %>
+						<tr id="rowSubTotal" class="subscription_row">
+							<th>Sub Total:</th>
+							<td id="subTotalCell"><%= number_to_currency(@subtotal / 100.00) %></td>	
+						</tr>
+						<tr id="rowDiscount" class="subscription_row">
+							<th>Discount:</th>
+							<td id="discountCell"><%= number_to_currency(@discount / 100.00) %></td>
+						</tr>
+						<tr id="rowTotal" class="subscription_row">
+							<th>Total:</th>
+							<td id="totalCell"><%= number_to_currency((@subtotal - @discount) / 100.00) %></td>	
+						</tr>
+					<% end %>
+				</table>
+				
+				<% if @subscription.plan_id != 'free' and @total > 0.0 %>
+					<div id="cancelSubscBlock" class="subsc-action">
+						<span><a id="cancelSubsc" href="#" class="subsc-btn">Cancel Subscription</a></span>
+						<p class="sub-text">Canceling your subscription does not delete your binder. Your subscriptions will revert back to free.</p>
+					</div>
+					<div id="updateSubscCardBlock" class="subsc-action">
+						<a id="updateSubscCard" href="#" class="subsc-btn">Update Payment Method</a>
+					</div>
+				<% end %>
+				<div id="subscBackBlock" class="subsc-action">
+					<%= link_to "Back to Binder", binder_path(@subscription.binder_id), :class => 'subsc-btn' %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="processingRequest" class="modal hide fade">
+	<div class="modal-body">
+    	<p>Busy, Please Wait...</p>
+  	</div>
+</div>

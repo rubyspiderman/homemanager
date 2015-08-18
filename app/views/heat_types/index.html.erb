@@ -1,0 +1,21 @@
+<h1>Listing heat_types</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @heat_types.each do |heat_type| %>
+  <tr>
+    <td><%= link_to 'Show', heat_type %></td>
+    <td><%= link_to 'Edit', edit_heat_type_path(heat_type) %></td>
+    <td><%= link_to 'Destroy', heat_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Heat type', new_heat_type_path %>

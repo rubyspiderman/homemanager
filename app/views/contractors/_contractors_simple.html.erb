@@ -1,0 +1,28 @@
+<% if @contractors.length > 0 %>
+
+	<table class="table">
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Phone</th>
+		</tr>
+		
+		<% @contractors[0,3].each do |contractor| %>
+		
+		<tr>
+			<td><%= contractor.name.titleize unless contractor.name.nil? %></td>
+			<td><%= contractor.contractor_type %></td>
+			<td><%= contractor.phone.phony_formatted(:format => :national, :spaces => '-') unless contractor.phone.nil? %></td>
+		</tr>
+		
+		<% end %>
+	
+	</table>
+
+<% else %>
+
+	<div class="alert alert-info">You have no contractors, you should add some!</div>
+
+<% end %>
+
+<%= link_to "View All Contractors", binder_binder_contractors_path(working_binder), :class => 'btn btn-hb' %>

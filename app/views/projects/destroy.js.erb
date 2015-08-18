@@ -1,0 +1,3 @@
+updateDataTable(
+		"<%= escape_javascript(render(:partial => "shared/resource_index", :locals => { :resources => @projects })) %>",
+		"<%= @projects.count %>");

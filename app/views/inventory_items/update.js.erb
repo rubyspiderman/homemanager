@@ -1,0 +1,12 @@
+<% if @inventory_item.errors.any? %>
+	
+	showModalForm("<%= escape_javascript(render(:partial => "form"))%>");
+
+<% else %>
+
+	closeModalForm();
+	updateDataTable(
+		"<%= escape_javascript(render(:partial => "shared/resource_index", :locals => { :resources => @inventory_items })) %>",
+		"<%= @inventory_items.count %>");
+
+<% end %>

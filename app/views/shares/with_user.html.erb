@@ -1,0 +1,54 @@
+<div>
+	<div class="tabbable">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#tab1" data-toggle="tab">Shared With Me</a></li>
+    		<li><a href="#tab2" data-toggle="tab">Shared By Me</a></li>
+		</ul>
+		<div class="tab-content">
+		    <div class="tab-pane active" id="tab1">
+				<ul class="share-list">
+					<% @shared_with_user.each do |share| %>
+						<% if share.status == 'rejected' %>
+							<% next %>
+						<% end %>
+						<li id='share-<%= share.id %>' class='share'>
+							<h4>
+								<%= link_to share.get_sharable do %>
+									<%= share.sharable_type %>&nbsp;<%= share.sharable.name %>
+								<% end %>
+							</h4>
+							<p> is being shared by&nbsp;<%= User.find(share.shared_by_id).email %></p>
+							<p>You have <%= share.role_name.sub('_','-').titleize %> access.</p>
+							<% if share.status == 'pending'%>
+								<%= link_to 'Accept', accept_share_path(share), :class => 'btn btn-hb' %>
+								<%= link_to 'No Thanks', reject_share_path(share), :remote => true, :class => 'btn' %>
+							<% else %>
+								<%= link_to 'Stop Sharing', reject_share_path(share), :confirm => t(:confirm_delete), :remote => true, :class => 'btn btn-hb delete-share' %>
+							<% end %>
+						</li>
+					<% end %>
+				</ul>
+		    </div>
+		    <div class="tab-pane" id="tab2">
+		      	<ul class='share-list'>
+					<% @shared_by_user.each do |share| %>
+						<li id='share-<%= share.id %>' class='share'>
+							<h4>
+								<%= link_to share.get_sharable do %>
+									<%= share.sharable_type %>&nbsp;<%= share.sharable.name %>
+								<% end %>
+							</h4>
+							<p>with&nbsp;<%= share.shared_with_email %>&nbsp;as&nbsp;<%= share.role_name.sub('_','-').titleize %>.</p>
+							<p>Status is <%= share.status %></p>
+							<% if share.status == 'pending' || share.status == 'accepted' %>
+								<%= link_to 'Stop Sharing', share, :confirm => t(:confirm_delete), :method => :delete, :remote => true, :class => 'btn btn-hb delete-share' %>
+							<% else %>
+								<%= link_to 'Remove', share, :confirm => t(:confirm_delete), :method => :delete, :remote => true, :class => 'btn btn-hb delete-share' %>
+							<% end %>
+						</li>
+					<% end %>
+				</ul>
+		    </div>
+		</div>
+	</div>
+</div>

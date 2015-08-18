@@ -1,0 +1,68 @@
+<ul class="nav nav-list">
+	<% if (params[:controller] == "binders") %>
+		<li class="nav-sub active"><%= link_to "Overview", working_binder %></li>
+	<% else %>
+		<li class="nav-sub"><%= link_to "Overview", working_binder %></li>
+	<% end %>
+		
+	<!--<li class="nav-header">Property</li>-->
+	<% if (params[:controller] == "structures") %>
+		<li class="nav-sub active"><%= link_to 'Structures', binder_structures_path(working_binder) %></li>
+	<% else %>
+		<li class="nav-sub"><%= link_to "Structures", binder_structures_path(working_binder) %></li>
+	<% end %>
+	<% if (params[:controller] == "areas") %>
+		<li class="nav-sub active"><%= link_to 'Areas & Rooms', binder_areas_path(working_binder) %></li>
+	<% else %>
+		<li class="nav-sub"><%= link_to 'Areas & Rooms', binder_areas_path(working_binder) %></li>
+	<% end %>
+
+	<% if (params[:controller] == "maintenance_items") %>
+		<li class="nav-sub active"><%= link_to "Maintenance", binder_maintenance_items_path(working_binder) %></li>
+	<% else %>
+		<li class="nav-sub"><%= link_to "Maintenance", binder_maintenance_items_path(working_binder) %></li>
+	<% end %>
+	<% if (params[:controller] == "projects") %>
+		<li class="nav-sub active"><%= link_to "Projects", binder_projects_path(working_binder) %></li>
+	<% else %>
+		<li class="nav-sub"><%= link_to "Projects", binder_projects_path(working_binder) %></li>
+	<% end %>
+	<% if (params[:controller] == "contractors") %>
+		<li class="nav-sub active"><%= link_to "Contractors", binder_binder_contractors_path(working_binder) %></li>
+	<% else %>
+		<li class="nav-sub"><%= link_to "Contractors", binder_binder_contractors_path(working_binder) %></li>
+	<% end %>
+	
+	<!--<li class="nav-header">Materials</li>-->
+	<% if (params[:controller] == "appliances") %>
+		<li class="nav-sub active"><%= link_to "Appliances", binder_appliances_path(working_binder) %></li>
+	<% else %>
+		<li class="nav-sub"><%= link_to "Appliances", binder_appliances_path(working_binder) %></li>
+	<% end %>
+	<!--
+	<% if (params[:controller] == "materials") %>
+		<li class="nav-sub active"><%= link_to "Materials", "#" %></li>
+	<% else %>
+		<li class="nav-sub"><%= link_to "Materials", "#" %></li>
+	<% end %>
+	-->
+	<% if (params[:controller] == "finishes") %>
+		<li class="nav-sub active"><%= link_to "Finishes", binder_finishes_path(working_binder) %></li>
+	<% else %>
+		<li class="nav-sub"><%= link_to "Finishes", binder_finishes_path(working_binder) %></li>
+	<% end %>
+	<% if (params[:controller] == "paints") %>
+		<li class="nav-sub active"><%= link_to "Paints", binder_paints_path(working_binder) %></li>
+	<% else %>
+		<li class="nav-sub"><%= link_to "Paints", binder_paints_path(working_binder) %></li>
+	<% end %>
+	<% if (params[:controller] == "inventory_items") %>
+		<li class="nav-sub active"><%= link_to "Inventory", binder_inventory_items_path(working_binder) %></li>
+	<% else %>
+		<li class="nav-sub"><%= link_to "Inventory", binder_inventory_items_path(working_binder) %></li>
+	<% end %>
+<!--
+	<li><a href="#">Utilities</a></li>
+-->
+	
+</ul>

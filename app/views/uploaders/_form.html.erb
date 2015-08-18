@@ -1,0 +1,11 @@
+<%= include_gon %>
+<div id="container_<%= type %>_<%= itemid %>">
+	<a id="pickfiles_<%= type %>_<%= itemid %>" href="#" class="btn btn-hb">Select Files to Upload</a>
+	<a id="uploadfiles_<%= type %>_<%= itemid %>" href="#" class="btn" style="display:none;">Upload Selected Files</a>
+	
+	<div id="dropzone_<%= type %>_<%= itemid %>" class="dropzone">
+		<div class="dropzone-text" style="display:none;">Drop Files Here...</div>
+		<br/>
+		<div id="filelist_<%= type %>_<%= itemid %>"></div>
+	</div>
+</div>

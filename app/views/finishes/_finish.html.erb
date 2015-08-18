@@ -1,0 +1,18 @@
+<table class="table table-condensed">
+	<tr>
+		<th class="fixed-width"><%= t(:finish_make) %></th>
+		<td><%= finish.make %></td>
+		<th class="fixed-width"><%= t(:finish_model) %></th>
+		<td><%= finish.model %></td>
+		<th class="fixed-width"><%= t(:finish_style_color)%></th>
+		<td><%= finish.style_color %></td>
+	</tr>
+	<tr>
+		<th><%= t(:purchase_store) %></th>
+		<td><%= finish.purchase.store %></td>
+		<th><%= t(:purchase_price) %></th>
+		<td><%= number_to_currency(finish.purchase.price) %></td>
+		<th><%= t(:purchase_date) %></th>
+		<td><%= finish.purchase.date.strftime("%m/%d/%Y") unless finish.purchase.date.nil? %></td>
+	</tr>
+</table>

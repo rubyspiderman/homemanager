@@ -1,0 +1,9 @@
+	<%= content_for :header do %>
+		<% 'Property Overview' %>
+	<% end %>
+	
+	<%= content_for :toolbarbuttons do %>
+		<%= link_to 'Edit Binder', edit_binder_path(working_binder), :class => 'btn btn-hb' %>
+	<% end %>	
+
+	<%= render :partial => "shared/binder_header", :locals => { :binder => @binder } %>

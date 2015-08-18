@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 	<title>HomeBinder.com | Organize. Manage. Sell.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="home organization, home binder, homebinder, home projects, home management, 
+    managing home projects, home improvement projects, home repair, kitchen remodeling, plumbing project, 
+    electrical project, painting project, real estate project, decorating project, organize home, home management">
+    <meta name="description" content="HomeBinder.com was created to help people with the answers to all of these 
+    questions and much more. Whether an owner or a renter, homes have significant value. HomeBinder.com helps with 
+    the organization of information, the tracking of routine maintenance tasks and the point of sale. Get peace of 
+    mind that your home is taken care of and stop the frustration that information that you know you have somewhere 
+    is not lost.">
+  <%= google_webfonts_link_tag "Open_Sans" %>  
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<%= render 'shared/landing_header' %>
+	<div class="container-fluid">
+		<!--<p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>-->
+		<%= render 'shared/landing_content' %>
+	</div>
+	<%= render 'shared/landing_footer' %>
+</body>
+</html>

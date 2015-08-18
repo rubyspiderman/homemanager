@@ -1,0 +1,20 @@
+<%= simple_form_for(@area, :html => { :class => 'data_form' }, :remote => true) do |f| %>
+	<%= f.error_notification %>
+	<%= f.hidden_field :binder_id %>
+ 	<%= f.hidden_field :created_by %>
+
+	<div class="form-inputs">
+		<%= f.input :name, :autofocus => true, :input_html => { :class => 'span6' } %>
+		<%= f.input :area_type, :input_html => { :class => 'autocomplete', :autocomplete => 'off', :data => { :name => "area_type", :local => AreaType.available(current_user.id), :span => 'span6' }} %>
+		<br/><br/> 
+		<%= f.input :structure_id, collection: Structure.where(:binder_id => @area.binder_id), :input_html => { :class => 'span6' } %>
+		<%= f.input :dimensions, :input_html => { :class => 'span6' }%>
+		<%= f.input :details, :as => :text, input_html: { :rows => '5', :class => 'span6' } %>
+	</div>
+
+	<div class="form-actions">
+		<%= f.button :submit, t(:save), :disable_with => t(:wait), :class => 'btn btn-hb' %>
+		<%= link_to t(:cancel), "#", :class => "btn cancel_data_form cancel_edit_form", 'data-itemid' => @area.id, 'data-controller' => 'area' %>
+	</div>
+
+<% end %>

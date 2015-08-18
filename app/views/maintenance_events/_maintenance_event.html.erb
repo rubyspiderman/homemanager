@@ -1,0 +1,5 @@
+<span>
+	Due On:&nbsp;<%= maintenance_event.do_date.strftime("%m/%d/%Y") unless maintenance_event.do_date.nil? %><br />
+	Completed On:&nbsp;<%= maintenance_event.completed_date.strftime("%m/%d/%Y") unless maintenance_event.completed_date.nil? %>&nbsp;by&nbsp;
+	<%= Contractor.find(maintenance_event.contractor_id).name unless maintenance_event.contractor_id.nil? %>
+</span>

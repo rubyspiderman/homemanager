@@ -1,0 +1,52 @@
+	<%= content_for :header do %>
+		<% 'Binders' %>
+	<% end %>
+
+	<%= content_for :add_button do %>
+		<p><strong><%= pluralize(@binders.count, 'Binder') %></strong>&nbsp; 
+		<%= link_to new_binder_path, :class => 'btn' do %>
+			<i class='icon-plus'></i>&nbsp;Add Binder
+		<% end %>
+		</p>
+	<% end %>
+		
+<div class="page-header">
+	<h1>My Binders</h1>
+	<p>Manage your binders here</p>
+</div>
+
+<%= link_to 'Create New Binder', new_binder_path, :class => 'btn btn-hb' %>
+
+
+<% @binders.each_slice(3) do |bindergroup| %>
+	<ul class="thumbnails">
+	<% bindergroup.each do |b| -%>
+      <li class="span4">
+        <div class="thumbnail binder-thumb">
+          <% if b.primary? %>
+  	  	  	<div class="binder-primary">&nbsp;</div>
+  	  	  <% end %>
+          <!--<img data-src="holder.js/300x200/industrial" alt="Property Image" style="width: 300px; height: 200px;">-->
+          <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= b.property.address1 %>,<%= b.property.city %>,<%= b.property.state %>&zoom=15&size=300x200&key=AIzaSyBkAHC5xhv7J2CSDJWOgAEAbhEaATTsb1Y&sensor=false&markers=color:red|*|<%= b.property.address1 %><%= b.property.city %>, <%= b.property.state %>" class="pull-left" />
+          <div class="caption">
+            <h3><%= link_to b.name, b %></h3>
+            <p><%= b.property.address1 %></p>
+            <p><%= b.property.city %>, <%= b.property.state %></p>
+            <% if can? :subscribe, b %>
+	            <div class="binder-subsc-info">
+	            	<% if @subscriptions[b.id].nil? %>
+	            		<p class="binder-subsc-detail">Subscription Level:&nbsp;<%= 'Free' %></p>
+	            		<p><%= link_to 'Upgrade', b.subscription, :class => 'btn btn-mini btn-hb btn-block' %></p>
+	            	<% else %>
+	            		<p class="binder-subsc-detail">Subscription Level:&nbsp;<%= @subscriptions[b.id].plan.name.titleize %></p>
+	            		<p class="binder-subsc-detail">Renews On:&nbsp;<%= DateTime.parse(Time.at(@subscriptions[b.id].current_period_end).to_s).strftime("%m/%d/%Y") %></p>
+	            	<% end %>
+	            </div>
+            <% end %>
+            <p><%= link_to 'View Binder', b, :class => 'btn btn-hb' %> <%= link_to 'Edit', edit_binder_path(b), :class => 'btn' %></p>
+          </div>
+        </div>
+      </li>
+   	<% end -%>
+	</ul>
+<% end %>

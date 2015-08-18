@@ -1,0 +1,42 @@
+<table class="table table-condensed">
+	<tr>
+		<th class="fixed-width"><%= t(:paint_manufacturer) %></th>
+		<td><%= paint.paint_manufacturer %></td>
+		<th class="fixed-width"><%= t(:paint_type) %></th>
+		<td><%= paint.paint_type %></td>
+	</tr>
+	<tr>
+		<th><%= t(:paint_code) %></th>
+		<td><%= paint.code %></td>
+		<th><%= t(:paint_makeup) %></th>
+		<td><%= paint.makeup %></td>
+	</tr>
+	<tr>
+		<th><%= t(:paint_areas) %></th>
+		<td>
+			<span>
+				<% paint.areas.each_with_index do |area, index| %>
+			  		<% if index < paint.areas.length - 1 %>
+			    		<%= "#{area.name}," %>
+			    	<% else %>
+			    		<%= area.name %>
+			    	<% end %>
+			    <% end %>
+			</span>
+		</td>
+		<th></th>
+		<td></td>
+	</tr>
+	<tr>
+		<th><%= t(:purchase_store) %></th>
+		<td><%= paint.purchase.store %></td>
+		<th><%= t(:purchase_price) %></th>
+		<td><%= number_to_currency(paint.purchase.price) %></td>
+	</tr>
+	<tr>
+		<th><%= t(:purchase_date) %></th>
+		<td><%= paint.purchase.date.strftime("%m/%d/%Y") unless paint.purchase.date.nil? %></td>
+		<th></th>
+		<td></td>
+	</tr>
+</table>

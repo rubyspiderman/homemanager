@@ -1,0 +1,58 @@
+<div id='app-header' class="navbar navbar-fixed-top navbar-inverse">
+	<div class="navbar-inner">
+    	<div class="container-fluid">
+    		<a href="<%= user_binders_path(working_user) if user_signed_in? %>" class="brand-inner">&nbsp;</a>
+			<% if user_signed_in? %>
+				<ul class="nav pull-right">
+      				<li>
+      					<%= link_to destroy_user_session_path, :method => :delete do %>
+      						<i class='icon-lock icon-white'></i>&nbsp;Logout
+      					<% end %>
+      				</li>
+      			</ul>
+      			<ul class="nav pull-right">
+      				<li class="dropdown">
+        				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %><b class="caret"></b></a>
+          				<ul class="dropdown-menu">
+          					<li><%= link_to "Profile", current_user.user_profile %></li>
+          					<li><%= link_to "Change Password", edit_user_registration_path(current_user) %></li>
+          					<li><%= link_to "Subscriptions", user_subscriptions_path(current_user)%></li>
+          				</ul>
+       				</li>
+      			</ul>
+				<ul class="nav pull-right">
+					<li class="dropdown">
+      					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Binders<b class="caret"></b></a>
+    					<ul class='dropdown-menu'>
+    						<li><%= link_to 'New Binder', new_user_binder_path(current_user) %></li>
+    						<li class='divider'></li>
+    						<% current_user.binders.each do |b| %>
+    							<li><%= link_to b.name, b %></li>
+    						<% end %>
+    					</ul>
+      				</li>
+				</ul>
+      			<ul class="nav pull-right">
+      				<li>
+      				<%= link_to user_shares_path(current_user), :remote => true do %>
+      					Sharing
+      					<% if Share.pending_share_count(current_user.email) > 0 %>
+      						<span class="badge appbar-badge"><%= Share.pending_share_count(current_user.email) %></span>
+      					<% end %>
+      				<% end %>
+      				</li>
+				</ul>
+				<%#= form_tag '/search', :class => "navbar-search" do %>
+      					<%#= text_field :search, params[:search_for], :class => "search-query", :placeholder => "find" %>
+      				<%# end %>
+    		<% end %>
+    	</div>
+  	</div>
+</div>	
+<div id='shade' class='shade'>
+	<div id="shadeContent"></div>
+	<div class="shade-buttonbar">
+		<button id="closeShade" class="btn pull-right">Close</button>
+		<div class="clear-float"></div>
+	</div>
+</div>

@@ -1,0 +1,9 @@
+	<%= content_for :header do %>
+		<%= t(:maintenance_item).pluralize %>
+	<% end %>
+	
+	<%= content_for :toolbarbuttons do %>
+		<%= link_to t(:maintenance_item_new), new_binder_maintenance_item_path(working_binder), :id => 'new_item_btn', :class => "btn btn-hb", :remote => true %>
+	<% end %>
+	
+	<%= render :partial => 'shared/resource_index', :locals => { :resources => @maintenance_items } %>

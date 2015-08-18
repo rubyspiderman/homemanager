@@ -1,0 +1,86 @@
+<!-- FOOTER -->
+<div class="divider"></div>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="span1"> <img src="assets/landing/flatlogo.png" alt="Logo for HomeBinder's home management software"> </div>
+      <div class="span3">
+        <ul>
+          <li>&copy; <%= Time.now.year %> HomeBinder Inc.</li>
+          <li><a href="/terms.html">Terms of Use</a></li>
+		  <li><a href="/privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <ul>
+        <li><a href="#Preview" class="smoothScroll">Preview</a></li>
+        <li><a href="#Features" class="smoothScroll">Features</a></li>
+        <li><a href="#Testimonials" class="smoothScroll">Testimonials</a></li>
+        <li><a href="#Pricing" class="smoothScroll">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <ul>
+          <li>
+    		<!-- A link to launch the Classic Widget -->
+			<a href="javascript:void(0)" data-uv-lightbox="classic_widget" data-uv-mode="full" data-uv-primary-color="#000000" data-uv-link-color="#fc6500" data-uv-default-mode="support" data-uv-forum-id="208729">Feedback &amp; Support</a>
+		  </li>
+        </ul>
+      </div>
+      <div class="span2"> Connect with us<br>
+        <a href="http://www.facebook.com/homebinder" target="_blank"><img src="assets/landing/facebookgrey.png" alt="Facebook image for HomeBinder's home management software"></a>&nbsp; <a href="http://www.twitter.com/homebinder" target="_blank"><img src="assets/landing/twittergrey.png" alt="Facebook image for HomeBinder's home management software"></a> </div>
+    </div>
+  </div>
+</footer>
+<%= javascript_include_tag "application" %>
+	
+	<script>
+		(function($){
+		    $.fn.rotate = function(params){
+		        return this.each(function(index, el){
+		            var defaults = {
+		                text : [],
+		                interval : 6000
+		            };
+		            
+		            var options = $.extend({}, defaults, params);
+		            var i = 0;
+		            
+		            if(options.text.length){
+		                setInterval(function(){
+		                    i = i < options.text.length -1 ? ++i : 0;
+		                    $(el).fadeOut(function(){ 
+		                        $(this).text(options.text[i]).fadeIn();
+		                    });
+		                }, options.interval);
+		            }
+		        });
+		    };
+		})(jQuery);	
+
+
+	  	$("#slider1").responsiveSlides({
+	  		speed: 500,
+			nav: true,
+	    	namespace: "centered-btns"
+	  	});
+	    
+		$("#rotate").rotate({ 
+	    	text : ['Sell.', 'Plan.', 'Projects.', 'Easy.', 'More.'], 
+	    	interval : 3000  // in miliseconds
+		});
+		
+		var items = (Math.floor(Math.random() * ($('#testimonials li').length)));
+		$('#testimonials li').hide().eq(items).show();
+	
+  		function next(){
+			$('#testimonials li:visible').delay(5000).fadeOut('slow',function(){
+				$(this).appendTo('#testimonials ul');
+				$('#testimonials li:first').fadeIn('slow',next);
+    		});
+    	}
+    	next();		
+  	</script>	
+	
+	<%= render 'layouts/uservoice' %>
+	<%= render 'layouts/analytics' if Rails.env.production? %>

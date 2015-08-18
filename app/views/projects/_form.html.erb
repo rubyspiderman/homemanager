@@ -1,0 +1,24 @@
+<%= simple_form_for(@project, :html => { :class => 'data_form' }, :remote => true) do |f| %>
+  <div class="modal-header">
+  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  	<h3><%= t(:project) %></h3>
+  </div>
+  
+  <div class="modal-body form-inputs">
+  	<%= f.hidden_field :binder_id %>
+  	<%= f.hidden_field :created_by %>
+  	<%= f.error_notification %>
+  	<%= f.input :name, :autofocus => true, :input_html => { :class => 'span8' } %>
+  	<%= f.input :project_type, :input_html => { :autocomplete => 'off', :class => 'autocomplete', :data => { :name => "project_type", :local => ProjectType.available(current_user.id), :span => "span8" }} %><br /><br />
+   	<%= f.input :project_status_id, collection: ProjectStatus.all, :input_html => { :class => 'span8' } %>
+   	<%= f.input :start_date, :as => :datepicker, :input_html => { :id => "start_date_show_date", :class => 'span8' } %>
+   	<%= f.input :end_date, :as => :datepicker, :input_html => { :id => "end_date_show_date", :class => 'span8' } %>
+  	<%= f.input :cost, :input_html => { :class => 'span8' } %>
+  	<%= f.input :details, :as => :text, :input_html => { :rows => 5, :class => 'span8' } %>
+  </div>
+
+  <div class="modal-footer">
+  	<%= f.button :submit, t(:save), :class => "btn btn-hb" %>
+  	<button type="button" class="btn" data-dismiss="modal" aria-hidden="true"><%= t(:cancel) %></button>
+  </div>
+<% end %>

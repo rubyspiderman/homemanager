@@ -1,0 +1,11 @@
+<% if @area.errors.any? %>
+	
+	prepareEditForm('area', "<%= escape_javascript(render(:partial => "form")) %>");
+
+<% else %>
+
+	updateDataTable(
+		"<%= escape_javascript(render(:partial => "shared/resource_index", :locals => { :resources => @areas })) %>",
+		"<%= @areas.count %>");
+
+<% end %>

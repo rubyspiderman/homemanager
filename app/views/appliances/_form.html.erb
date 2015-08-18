@@ -1,0 +1,40 @@
+<%= simple_form_for(@appliance, :html => { :class => "data_form" }, :remote => true) do |f| %>
+  	<%= f.error_notification %>
+  	<%= f.hidden_field :binder_id %>
+  	<%= f.hidden_field :created_by %>
+  	
+  	<div class="form-inputs">
+  		<% if Binder.includes(:subscription).find(@appliance.binder_id).subscription.plan_id != 'free' %>
+  			<p>Either manufacturer and model or UPC code are required to perform a recall check.</p>
+  		<% end %>
+  		<%= f.input :name, :autofocus => true, :input_html => { :class => 'span5' } %>
+  		<div class="controls-row">
+			<div class="control-group-inline span5">
+				<%= f.label :manufacturer %>
+				<div class="controls">
+					<%= f.input_field :manufacturer, :autocomplete => 'off', :class => 'autocomplete', :data => { :name => "manufacturer", :local => ApplianceManufacturer.available(working_user.id), :span => "span11" } %>
+				</div>
+			</div>
+			<div class="control-group-inline span4">
+				<%= f.label :model %>
+				<div class="controls">
+					<%= f.input_field :model, :class => "span11", :hint => 'hint here' %>
+				</div>
+			</div>
+		</div>
+		<%= f.simple_fields_for :purchase do |p| %>
+			<%= p.hidden_field :created_by, :value => @appliance.created_by %>
+			<%= render partial: 'purchases/form_for', object: p, as: :f %>
+		<% end %>
+		<%= f.input :serial_no, :input_html => { :class => 'span5'} %>
+		<%= f.input :upc, :input_html => { :class => 'span5'} %>
+		<%= f.input :user_guide_url, :input_html => { :class => 'span5' }  %>
+  		<%= f.input :warranty, :as => :text, :input_html => { :rows => '5', :class => 'span9'} %>
+  		<%= f.input :details, :as => :text, :input_html => { :rows => '5', :class => 'span9' } %>
+  	</div>
+
+  	<div class="form-actions">
+		<%= f.button :submit, t(:save), :disable_with => t(:wait), :class => 'btn btn-hb' %>
+		<%= link_to t(:cancel), "#", :class => "btn cancel_data_form cancel_edit_form", 'data-itemid' => @appliance.id, 'data-controller' => 'appliance' %>
+	</div>
+<% end %>

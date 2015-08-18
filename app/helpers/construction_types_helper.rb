@@ -1,0 +1,2 @@
+module ConstructionTypesHelper
+end

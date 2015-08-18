@@ -1,0 +1,11 @@
+<%= f.input :country, wrapper_html: {:class => "hidden"} do %>
+	<%= f.select :country, region_options_for_select(available_countries) %>
+<% end %>
+<%= f.input :address1, :input_html => { :class => 'span12'} %>
+<%= f.input :address2, :input_html => { :class => 'span12'} %>
+<%= f.input :city, :input_html => { :class => 'span12'} %>
+<%= f.input :state, collection: us_states, :input_html => { :class => 'span12' } %>
+<%#= f.input :state do %>
+	<%#= f.subregion_select :state, 'US', {}, { :class => "span12" } %>
+<%# end %>
+<%= f.input :zip, :input_html => { :class => 'span12'} %>

@@ -1,0 +1,49 @@
+<div class="span12">
+	<%= simple_form_for(@binder_contractor, :html => { :class => "data_form" }, :remote => true) do |f| %>
+		
+		<%= f.hidden_field :binder_id %>
+		<%= f.hidden_field :created_by %>
+		
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3><%= t(:contractor) %></h3>
+		</div>
+		<%= f.error_notification %>
+	
+		<%= f.simple_fields_for(:contractor) do |c| %>
+			<%= c.hidden_field :created_by %>
+			
+			<div class="modal-body">
+				<div class="tabbable">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#generalTab" data-toggle="tab">General</a></li>
+    					<li><a href="#moreTab" data-toggle="tab">More</a></li>	
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="generalTab">
+							<%= c.input :name, :autofocus => true, :input_html=> { :class => 'span12' } %>
+			  				<%= c.input :contractor_type, :input_html => { :autocomplete => 'off', :class => 'autocomplete', :data => { :name => "con_type", :local => ContractorType.available(current_user.id), :span => "span12" }} %><br /><br />
+			  				<%= c.input :phone, :input_html => { :class => 'span12'} %>
+			  				<%= c.input :email, :input_html => { :class => 'span12'} %>
+						</div>
+						<div class="tab-pane" id="moreTab">
+							<%= c.simple_fields_for :address do |a| %>
+								<%= render partial: 'addresses/form_for', object: a, as: :f %>
+			  				<% end %>
+			  				<%= c.input :url, :as => :string, :input_html => { :class => 'span12' } %>
+							<%= c.input :account_number, :input_html => { :class => 'span12' } %>
+							<%= c.input :contact, :input_html => { :class => 'span12' } %>
+							<%= c.input :details, :as => :text, :input_html => { :class => 'span12', :rows => '5' } %>
+						</div>
+					</div>
+				</div>
+				<%= c.hidden_field :verified %>
+		  	</div>
+		<% end %>
+	
+		<div class="modal-footer">
+		    <%= f.button :submit, t(:save), :disable_with => t(:wait), :class => 'btn btn-hb' %>
+		    <button type="button" class="btn" data-dismiss="modal" aria-hidden="true"><%= t(:cancel) %></button>	
+		</div>
+	<% end %>
+</div>

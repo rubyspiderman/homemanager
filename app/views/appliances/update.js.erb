@@ -1,0 +1,12 @@
+<% if @appliance.errors.any? %>
+	
+	prepareEditForm('appliance', "<%= escape_javascript(render(:partial => "form"))%>");
+
+<% else %>
+
+	closeDataForm();
+	updateDataTable(
+		"<%= escape_javascript(render(:partial => "shared/resource_index", :locals => { :resources => @appliances })) %>",
+		"<%= @appliances.count %>");
+
+<% end %>

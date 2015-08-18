@@ -1,0 +1,16 @@
+	<%= content_for :header do %>
+		<%= t(:contractor).pluralize %>
+	<% end %>
+	
+	<%= content_for :item_count do %>
+		<%= @contractors.count %>
+	<% end %>
+	
+	<%= content_for :toolbarbuttons do %>
+		<%= link_to t(:contractor_new), new_binder_contractor_path(working_binder), :id => 'new_item_btn', :class => "btn btn-hb", :remote => true %>
+		<%= link_to_function 'Hide All Details', 'hideAllDetails()', :id => 'hideAllButton', :class => 'btn' %>
+		<%= link_to_function 'Show All Details', 'showAllDetails()', :id => 'showAllButton', :class => 'btn', :style => 'display:none;' %>
+	<% end %>
+	
+	<%= render :partial => 'shared/resource_index', :locals => { :resources => @contractors } %>
+	

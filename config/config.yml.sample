@@ -1,0 +1,27 @@
+development:
+  aws:
+    access_key_id     : "1111111111111111111111"
+    secret_access_key : "2222222222222222222222222222222222222/"
+    s3_bucket         : "homemanagerdev"
+    bucket_url        : "https://homemanagerdev.s3.amazonaws.com:443/"
+
+testing:
+  aws:
+    access_key_id     : "1111111111111111111111"
+    secret_access_key : "2222222222222222222222222222222222222/"
+    s3_bucket         : "homemanagertesting"
+    bucket_url        : "https://homemanagertesting.s3.amazonaws.com:443/"
+    
+test:
+  aws:
+    access_key_id     : "1111111111111111111111"
+    secret_access_key : "2222222222222222222222222222222222222/"
+    s3_bucket         : "homemanagertest"
+    bucket_url        : "https://homemanagertest.s3.amazonaws.com:443/"
+
+production:
+  aws:
+    access_key_id     : "1111111111111111111111"
+    secret_access_key : "2222222222222222222222222222222222222/"
+    s3_bucket         : "homemanagerprod"
+    bucket_url        : "https://homemanagerprod.s3.amazonaws.com:443/"

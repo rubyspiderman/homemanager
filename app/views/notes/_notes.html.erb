@@ -1,0 +1,16 @@
+<% @notes.each do |note| %> 
+	<div id="note_<%= note.id %>" class="note">
+		<div class="pull-left">
+			<%= note.content %>
+			<div class="created_at">
+				<%= note.created_at.strftime("%m/%d/%Y") %>
+			</div>
+		</div>
+		<div class="pull-right">
+			<%= link_to note, :confirm => t(:confirm_delete), :method => :delete, :remote => true, :class => 'delete_post', 'data-toggle' => "tooltip", 'title' => t(:delete_tip) do %>
+	     		<i class='icon-remove'></i>
+	     	<% end %>
+		</div>
+		<div class="clear-float"></div>
+	</div>
+<% end %>

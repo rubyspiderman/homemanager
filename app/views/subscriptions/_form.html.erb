@@ -1,0 +1,56 @@
+<div id="freeSubsc" class="pull-left">
+	
+</div>
+<div id="basicSubsc" class="pull-left">
+</div>
+<%= simple_form_for(@subscription) do |f| %>
+						<input id="subscId" type="hidden" />
+		  					<div class="payment-errors alert alert-error hide"></div>
+		
+							<div class="control-group">
+							    <label>Card Number</label>
+							    <div class="controls">
+							    	<input type="text" size="20" data-stripe="number" class="span5"/>
+							    </controls>
+						  	</div>
+		
+						  	<div class="control-group">
+							    <label>CVC</label>
+								<div class="controls">
+							    	<input type="text" size="4" data-stripe="cvc" class="span5"/>
+							    </div>
+							</div>
+		
+						  	<div class="control-group">
+							    <label>Expiration (MM/YYYY)</label>
+							    <div class="controls">
+							      	<input type="text" maxlength="2" size="2" data-stripe="exp-month" class="span2"/>
+							    	<input type="text" maxlength="4" size="4" data-stripe="exp-year" class="span3"/>
+								</div>
+							</div>
+						  
+						  	<div class="control-group">
+							  	<label>Coupon</label>
+							  	<div class="controls">
+							  		<input id="coupon_id" type="text" class="span5" />
+							  	</div>	
+							</div>
+						  
+						<div class="modal-footer">
+						  <button id="submitPayment" type="submit" class="btn btn-success">Submit Payment</button>
+						  <button type="button" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+						</div>
+
+	<%= f.hidden_field :binder_id %>
+	<%= f.hidden_field :stripe_token %>
+	<%= f.hidden_field :plan_id %>
+	
+	<%= f.input :coupon_id, :label => 'Coupon Code' %>
+	
+
+	<div class="controls form-actions">
+		<%= f.button :submit, t(:ok), :class => "btn btn-hb" %>
+		<%= link_to t(:cancel), user_binders_path(working_user), :class => "btn" %>
+	</div>
+	
+<% end %>

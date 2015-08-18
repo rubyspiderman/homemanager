@@ -1,0 +1,2 @@
+module ContractorAbilitiesHelper
+end

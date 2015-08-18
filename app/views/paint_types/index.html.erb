@@ -1,0 +1,21 @@
+<h1>Listing paint_types</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @paint_types.each do |paint_type| %>
+  <tr>
+    <td><%= link_to 'Show', paint_type %></td>
+    <td><%= link_to 'Edit', edit_paint_type_path(paint_type) %></td>
+    <td><%= link_to 'Destroy', paint_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Paint type', new_paint_type_path %>

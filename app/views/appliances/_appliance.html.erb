@@ -1,0 +1,40 @@
+<table class="table table-condensed">
+	<% if Binder.includes(:subscription).find(appliance.binder_id).subscription.plan_id != 'free' and appliance.ready_for_recall %>
+		<tr>
+			<th><%= t(:appliance_last_recall_check) %></th>
+			<td><%= appliance.last_recall_check %></td>
+			<td colspan="2"><%= link_to "Check Again", appliance_recalls_path(appliance) %></td>
+		</tr>
+	<% end %>
+	<tr>
+		<th class="fixed-width"><%= t(:appliance_manufacturer) %></th>
+		<td><%= appliance.manufacturer %></td>
+		<th class="fixed-width"><%= t(:appliance_model) %></th>
+		<td><%= appliance.model %></td>
+	</tr>
+	<tr>
+		<th><%= t(:appliance_serial) %></th>
+		<td><%= appliance.serial_no %></td>
+		<th><%= t(:appliance_upc) %></th>
+		<td><%= appliance.upc %></td>
+	</tr>
+	<tr>
+		<th><%= t(:appliance_warranty) %></th>
+		<td colspan="3"><%= appliance.warranty %></td>
+	</tr>
+	<tr>
+		<th><%= t(:purchase_store) %></th>
+		<td><%= appliance.purchase.store %></td>
+		<th><%= t(:purchase_price) %></th>
+		<td><%= number_to_currency(appliance.purchase.price) %></td>
+	</tr>
+	<tr>
+		<th><%= t(:purchase_date) %></th>
+		<td><%= appliance.purchase.date.strftime("%m/%d/%Y") unless appliance.purchase.date.nil? %></td>
+		<th></th>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="4"><%= link_to 'User Guide', appliance.user_guide_url unless appliance.user_guide_url.nil? or appliance.user_guide_url.empty? %></td>
+	</tr>
+</table>

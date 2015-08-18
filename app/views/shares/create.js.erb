@@ -1,0 +1,9 @@
+<% if @share.errors.any? %>
+	
+	showModalForm("<%= escape_javascript(render(:partial => "form")) %>");
+
+<% else %>
+
+	closeModalForm();
+	
+<% end %>

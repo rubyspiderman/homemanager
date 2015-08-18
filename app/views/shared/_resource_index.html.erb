@@ -1,0 +1,5 @@
+<% resources.each do |resource| %>
+	<% if can? :read, resource %>
+		<%= render :partial => 'shared/tabbed_resource', :locals => { :resource => resource } %>
+	<% end %>
+<% end %>

@@ -1,0 +1,21 @@
+<h1>Listing maintenance_types</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @maintenance_types.each do |maintenance_type| %>
+  <tr>
+    <td><%= link_to 'Show', maintenance_type %></td>
+    <td><%= link_to 'Edit', edit_maintenance_type_path(maintenance_type) %></td>
+    <td><%= link_to 'Destroy', maintenance_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Maintenance type', new_maintenance_type_path %>

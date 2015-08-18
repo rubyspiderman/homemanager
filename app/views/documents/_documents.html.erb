@@ -1,0 +1,16 @@
+<% @documents.each do |document| %> 
+<div id="doc_<%= document.id %>" class="note">
+	<div class="pull-left">
+		<a target="blank" href="<%= document.location %>"><%= document.name %></a>
+		<div class="created_at">
+			<%= document.created_at.strftime("%m/%d/%Y") %>
+		</div>
+	</div>
+	
+	<%= link_to document, :confirm => t(:confirm_delete), :method => :delete, :remote => true, 'data-toggle' => "tooltip", 'title' => t(:delete_tip), :class => 'pull-right delete_doc' do %>
+		<i class='icon-remove'></i>
+	<% end %>
+	
+	<div class="clearfix">&nbsp;</div>
+</div>
+<% end %>

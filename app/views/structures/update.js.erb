@@ -1,0 +1,11 @@
+<% if @structure.errors.any? %>
+	
+	prepareEditForm('structure', "<%= escape_javascript(render(:partial => "form"))%>");
+
+<% else %>
+
+	updateDataTable(
+		"<%= escape_javascript(render(:partial => "shared/resource_index", :locals => { :resources => @structures })) %>", 
+		"<%= @structures.count %>");
+
+<% end %>

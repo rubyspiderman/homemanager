@@ -1,0 +1,14 @@
+<ul class="thumbnails" data-toggle="lightbox">
+	<% @images.each do |image| %> 
+		<li>
+			<div class="photo-thumb">
+	        	<a class="thumbnail" href="<%= image.location %>">
+	          		<img style="max-width: 200px;" src="<%= image.location %>">
+	        	</a>
+	        	<%= link_to image, :confirm => t(:confirm_delete), :method => :delete, :remote => true, 'data-placement' => 'bottom', 'data-toggle' => "tooltip", 'title' => t(:delete_tip), :class => 'photo-thumb-delete delete_image' do %>
+					<i class='icon-remove'></i>
+				<% end %>
+			</div>
+      	</li>
+	<% end %>
+</ul>

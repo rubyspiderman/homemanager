@@ -1,0 +1,28 @@
+<% if @projects.length > 0 %>
+
+	<table class="table">
+		<tr>
+			<th>Name</th>
+			<th>Completion Date</th>
+			<th>Status</th>
+		</tr>
+		
+		<% @projects[0,3].each do |project| %>
+		
+		<tr>
+			<td><%= project.name %></td>
+			<td><%= project.end_date.strftime("%m/%d/%Y") unless project.end_date.nil? %></td>
+			<td><%= project.get_status.titleize unless project.get_status.nil? %></td>
+		</tr>
+		
+		<% end %>
+	
+	</table>
+	
+<% else %>
+
+	<div class="alert alert-info">You have no projects, you should add some!</div>
+
+<% end %>
+
+<%= link_to "View All Projects", binder_projects_path(working_binder), :class => 'btn btn-hb' %>

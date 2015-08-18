@@ -1,0 +1,9 @@
+	<%= content_for :header do %>
+		<% 'Maintenance Items' %>
+	<% end %>
+	
+	<h3>Add New Maintenance Item</h3>
+	
+	<%= render 'form' %>
+	
+	<%= link_to 'Back', maintenance_items_path %>

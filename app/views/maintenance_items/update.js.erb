@@ -1,0 +1,12 @@
+<% if @maintenance_item.errors.any? %>
+	
+	showModalForm("<%= escape_javascript(render(:partial => "form")) %>");
+
+<% else %>
+
+	closeModalForm();
+	updateDataTable(
+		"<%= escape_javascript(render(:partial => "shared/resource_index", :locals => {:resources => @maintenance_items })) %>",
+		"<%= @maintenance_items.count %>");
+
+<% end %>

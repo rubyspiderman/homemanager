@@ -1,0 +1,94 @@
+<div class="offset3 span6">
+	<div class="row">
+		<div class="span12">
+			<h3>Recalls for <%= @appliance.name %></h3>
+			<h4><%= @appliance.manufacturer unless @appliance.manufacturer.nil? %>&nbsp;
+				<%= @appliance.model unless @appliance.model.nil? %>&nbsp;
+				<%= "(UPC: #{@appliance.upc})" unless @appliance.upc.nil? or @appliance.upc.empty? %></h4>
+		</div>	
+	</div>
+	<div class="row">
+		<% if @recallCheck.total == 0 %>
+			<div class="object-block">
+				<h3>No recalls</h3>
+			</div>
+		<% else %>
+			<% @recallCheck.recalls.each do |r| %>
+				<div class="span12 object-block recall-block">
+					<table class='recall-table'>
+						<tr>
+							<th>Recall Number:</th>
+							<td><%= r["recall_number"] %></td>
+						</tr>
+						<tr>
+							<th>Recall Date:</th>
+							<td><%= r["recall_date"] %></td>
+						</tr>
+						<tr>
+							<th>Manufacturers:</th>
+							<td colspan="3">
+								<% if not r["manufacturers"].nil? %>
+									<% r["manufacturers"].each do |m| %>
+										<%= m %><br />
+									<% end %>
+								<% end %>
+							</td>
+						</tr>
+						<tr>
+							<th>Product Types:</th>
+							<td colspan="3">
+								<% if not r["product_types"].nil? %>
+									<% r["product_types"].each do |pt| %>
+										<%= pt %><br />
+									<% end %>
+								<% end %>
+							</td>
+						</tr>
+						<tr>
+							<th>Descrptions:</th>
+							<td colspan="3">
+								<% if not r["descriptions"].nil? %>
+									<% r["descriptions"].each do |d| %>
+										<%= d %><br />
+									<% end %>
+								<% end %>
+							</td>
+						</tr>
+						<tr>
+							<th>UPC Codes:</th>
+							<td colspan="3">
+								<% if not r["upcs"].nil? %>
+									<% r["upcs"].each do |u| %>
+										<%= u %><br />
+									<% end %>
+								<% end %>
+							</td>
+						</tr>
+						<tr>
+							<th>Hazards:</th>
+							<td colspan="3">
+								<% if not r["hazards"].nil? %>
+									<% r["hazards"].each do |h| %>
+										<%= h %><br />
+									<% end %>	
+								<% end %>
+							</td>
+						</tr>
+						<tr class="tr-last">
+							<th></th>
+							<td><a href="<%= r["recall_url"] %>" target="_blank">More Information</a></td>
+						</tr>
+					</table>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="row">
+		<div class="back-to-appliances">
+			<%= link_to "Back to appliances", binder_appliances_path(@appliance.binder_id) %>	
+			<% if @page < @recallCheck.pages %>
+				<%= link_to "Next", appliance_recalls_path(@appliance, :page => (@page+1).to_s), :class => 'pull-right'%>
+			<% end %>
+		</div>	
+	</div>
+</div>

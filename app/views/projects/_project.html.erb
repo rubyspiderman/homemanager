@@ -1,0 +1,11 @@
+<div>
+	<%= t(:project_type) %>&nbsp;<%= project.project_type unless project.project_type.nil? %>&nbsp;|&nbsp;
+	<%= t(:project_status) %>&nbsp;<%= project.get_status.titleize unless project.get_status.nil? %>
+</div>
+<div>
+	<%= t(:project_started) %>&nbsp;<%= project.start_date.strftime("%m/%d/%Y") unless project.start_date.nil? %>&nbsp;|&nbsp;
+	<%= t(:project_ended) %>&nbsp;<%= project.end_date.strftime("%m/%d/%Y") unless project.end_date.nil? %>
+</div>
+<div>
+	<%= t(:project_cost) %> <%= number_to_currency(project.cost) %>
+</div>

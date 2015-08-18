@@ -1,0 +1,21 @@
+<h1>Listing construction_types</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @construction_types.each do |construction_type| %>
+  <tr>
+    <td><%= link_to 'Show', construction_type %></td>
+    <td><%= link_to 'Edit', edit_construction_type_path(construction_type) %></td>
+    <td><%= link_to 'Destroy', construction_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Construction type', new_construction_type_path %>

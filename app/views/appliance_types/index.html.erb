@@ -1,0 +1,21 @@
+<h1>Listing appliance_types</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @appliance_types.each do |appliance_type| %>
+  <tr>
+    <td><%= link_to 'Show', appliance_type %></td>
+    <td><%= link_to 'Edit', edit_appliance_type_path(appliance_type) %></td>
+    <td><%= link_to 'Destroy', appliance_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Appliance type', new_appliance_type_path %>

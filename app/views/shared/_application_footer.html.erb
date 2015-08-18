@@ -1,0 +1,21 @@
+   	<div class="footer footer-li clearfix">
+		<div class="container-fluid">
+    		<div class="row-fluid">
+	    		<div class="span12 text-center">
+	    			&copy; Copyright <%= Time.now.year %> HomeBinder Inc. | 
+				   	<a href="/terms.html">Terms of Use</a> | 
+				    <a href="/privacy.html">Privacy Policy</a> |
+				    <!-- A link to launch the Classic Widget -->
+					<a href="javascript:void(0)" data-uv-lightbox="classic_widget" data-uv-mode="full" data-uv-primary-color="#000000" data-uv-link-color="#fc6500" data-uv-default-mode="support" data-uv-forum-id="208729">Feedback &amp; Support</a> |
+					Call us: 800.377.6915
+	    		</div>
+	    	</div>
+    	</div>
+    	
+		<%#= analytics_init if Rails.env.production? %>
+		<%= javascript_include_tag "application" %>
+		
+		<%= render 'layouts/uservoice' %>
+		<%= render 'layouts/analytics' if Rails.env.production? %>		
+		
+	</div>

@@ -1,0 +1,71 @@
+<div class="modal-header">
+	<h3>Subscription</h3>
+</div>
+<div class="modal-body">
+	<table>
+		<tr>
+			<th>Subscription Level:</th>
+			<td id="subscLevelCell"></td>
+		</tr>
+		<tr>
+			<th>Next Renewal On:</th>
+			<td id="nextRenewalCell"></td>
+		</tr>
+		<tr>
+			<th>Coupon:</th>
+			<td id="couponCell"></td>
+		</tr>
+	</table>
+	
+	<div id="beginUpgradeSubscBlock" class="hide">
+		<a id="beginUpgradeSubsc" href="#" class="subsc-btn">Upgrade Subscription</a>
+	</div>
+	<div id="cancelSubscBlock" class="hide">
+		<a id="cancelSubsc" href="#" class="subsc-btn">Cancel Subscription</a>
+	</div>
+	<div id="updateSubscCardBlock" class="hide">
+		<a id="updateSubscCard" href="#" class="subsc-btn">Update Payment Method</a>
+	</div>
+	
+	<div id="ccBlock" class="hide">
+		<h4>Payment Information</h4>
+		<form id="subscriptionForm">
+			<input id="subscId" type="hidden" />
+			<div class="payment-errors alert alert-error hide"></div>
+			
+			<div class="control-group">
+				<label>Card Number</label>
+				<div class="controls">
+					<input type="text" size="20" data-stripe="number" class="span5"/>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<label>CVC</label>
+				<div class="controls">
+					<input type="text" size="4" data-stripe="cvc" class="span5"/>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<label>Expiration (MM/YYYY)</label>
+				<div class="controls">
+					<input type="text" maxlength="2" size="2" data-stripe="exp-month" class="span2"/>
+					<input type="text" maxlength="4" size="4" data-stripe="exp-year" class="span3"/>
+				</div>
+			</div>
+							  
+			<div class="control-group">
+				<label>Coupon</label>
+				<div class="controls">
+					<input id="coupon_id" type="text" class="span5" />
+				</div>	
+			</div>
+							  
+		</form>
+	</div>
+</div>
+<div class="modal-footer">
+	<button id="submitPaymentButton" class="btn btn-success hide subsc-btn">Submit</button>
+	<button id="cancelPaymentButton" type="button" class="btn subsc-btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+</div>

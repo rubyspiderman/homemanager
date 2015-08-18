@@ -1,0 +1,21 @@
+<h1>Listing contractor_types</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @contractor_types.each do |contractor_type| %>
+  <tr>
+    <td><%= link_to 'Show', contractor_type %></td>
+    <td><%= link_to 'Edit', edit_contractor_type_path(contractor_type) %></td>
+    <td><%= link_to 'Destroy', contractor_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Contractor type', new_contractor_type_path %>

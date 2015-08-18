@@ -1,0 +1,21 @@
+<h1>Listing finish_models</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @finish_models.each do |finish_model| %>
+  <tr>
+    <td><%= link_to 'Show', finish_model %></td>
+    <td><%= link_to 'Edit', edit_finish_model_path(finish_model) %></td>
+    <td><%= link_to 'Destroy', finish_model, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Finish model', new_finish_model_path %>

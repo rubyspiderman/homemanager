@@ -1,0 +1,2 @@
+module HeatSourcesHelper
+end

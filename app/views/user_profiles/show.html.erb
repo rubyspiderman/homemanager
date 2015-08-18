@@ -1,0 +1,50 @@
+<div class="page-header">
+	<h1>My Profile</h1>
+	<p>Your HomeBinder profile information.</p>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<table class="table">
+	<tr>
+		<th>First Name:</th>
+		<td><%= @user_profile.first_name %></td>
+	</tr>
+	<tr>
+		<th>Last Name:</th>
+		<td><%= @user_profile.last_name %></td>
+	</tr>
+	<tr>
+		<th>Address:</th>
+		<td>
+			<%= @user_profile.address.address1 %> 
+			<% if @user_profile.address.address2 %>
+				<br /><%=@user_profile.address.address2%>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th>City:</th>
+		<td><%= @user_profile.address.city %></td>
+	</tr>
+	<tr>
+		<th>State:</th>
+		<td><%= @user_profile.address.state %></td>
+	</tr>
+	<tr>
+		<th>Zip:</th>
+		<td><%= @user_profile.address.zip %></td>
+	</tr>
+	<tr>
+		<th>Home Phone:</th>
+		<td><%= @user_profile.home_phone.phony_formatted(:format => :national, :spaces => '-') unless @user_profile.home_phone.nil? %></td>
+	</tr>
+	<tr>
+		<th>Mobile Phone:</th>
+		<td><%= @user_profile.mobile_phone.phony_formatted(:format => :national, :spaces => '-') unless @user_profile.mobile_phone.nil? %></td>
+	</tr>
+</table>
+
+<div class="form-actions">
+	<%= link_to 'Edit Profile', edit_user_profile_path(@user_profile), :class => 'btn btn-hb' %>
+</div>	
